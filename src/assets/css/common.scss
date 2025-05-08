@@ -1,0 +1,129 @@
+// 公共类
+// font-weight-100 ~ font-weight-900
+@for $i from 1 through 9 {
+  .font-weight-#{$i * 100} {
+    font-weight: $i * 100;
+  }
+}
+
+// margin
+// 4个方向
+// 数值有：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 35, 40, 50
+// .m-1 { margin: 1px; }
+// .mt-1 { margin-top: 1px; }
+// .mr-1 { margin-right: 1px; }
+// .mb-1 { margin-bottom: 1px; }
+// .ml-1 { margin-left: 1px; }
+@each $size in (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 35, 40, 50) {
+  .m-#{$size} {
+    margin: $size * 1px;
+  }
+  .mt-#{$size} {
+    margin-top: $size * 1px;
+  }
+  .mr-#{$size} {
+    margin-right: $size * 1px;
+  }
+  .mb-#{$size} {
+    margin-bottom: $size * 1px;
+  }
+  .ml-#{$size} {
+    margin-left: $size * 1px;
+  }
+}
+
+// padding
+// 4个方向
+// 数值有：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 35, 40, 50
+// .p-1 { padding: 1px; }
+// .pt-1 { padding-top: 1px; }
+// .pr-1 { padding-right: 1px; }
+// .pb-1 { padding-bottom: 1px; }
+// .pl-1 { padding-left: 1px; }
+@each $size in (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 35, 40, 50) {
+  .p-#{$size} {
+    padding: $size * 1px;
+  }
+  .pt-#{$size} {
+    padding-top: $size * 1px;
+  }
+  .pr-#{$size} {
+    padding-right: $size * 1px;
+  }
+  .pb-#{$size} {
+    padding-bottom: $size * 1px;
+  }
+  .pl-#{$size} {
+    padding-left: $size * 1px;
+  }
+}
+
+.border-box {
+  box-sizing: border-box;
+}
+
+.mc {
+  margin: 0 auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.self-start {
+  align-items: self-start;
+}
+
+.self-center {
+  align-items: center;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.flex-direction-column {
+  flex-direction: column;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-italic {
+  font-style: italic;
+}
+
+.select {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.pointer {
+  cursor: pointer;
+}
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+}
+.fixed {
+  position: fixed;
+}
