@@ -3,7 +3,9 @@
     <div class="left">
       <slot />
     </div>
-    <div class="center"></div>
+    <div class="center">
+      <RouterView />
+    </div>
     <div class="right"></div>
   </div>
 </template>
