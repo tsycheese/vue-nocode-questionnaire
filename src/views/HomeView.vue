@@ -63,3 +63,10 @@ const goToEditor = () => {
   router.push('/editor');
 };
 </script>
+
+<style scoped lang="scss">
+.home-container {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+</style>
