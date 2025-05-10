@@ -1,8 +1,12 @@
 <template>
-  <div>单选题</div>
+  <div class="single-select">
+    <MaterialHeader />
+  </div>
 </template>
 
 <script setup lang="ts">
+import MaterialHeader from '../Common/MaterialHeader.vue';
+
 const props = defineProps({
   status: {
     type: Object,
