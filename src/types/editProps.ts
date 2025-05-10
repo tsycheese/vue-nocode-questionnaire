@@ -28,8 +28,8 @@ export interface OptionsProps extends BaseProps {
 
 // ----------------------------------------
 
-// 公共的设置项，每个编辑组件都有的设置项
-// 编辑组件 -> 设置项 -> 设置组件
+// 公共的设置项，每个业务组件都有的设置项
+// 业务组件 -> 设置项 -> 编辑组件
 export interface BaseStatus {
   title: TextProps;
   desc: TextProps;
