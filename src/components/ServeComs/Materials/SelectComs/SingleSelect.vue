@@ -13,6 +13,13 @@
       :titleColor="computedStatus.titleColor"
       :descColor="computedStatus.descColor"
     />
+    <div class="radio-group mt-10">
+      <el-radio-group>
+        <el-radio v-for="(item, index) in computedStatus.options" :value="item" :key="index">
+          {{ item }}
+        </el-radio>
+      </el-radio-group>
+    </div>
   </div>
 </template>
 
