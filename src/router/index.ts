@@ -17,7 +17,7 @@ const router = createRouter({
       path: '/materials',
       name: 'materials',
       component: () => import('@/views/MaterialsView/index.vue'),
-      redirect: '/materials/select-group',
+      redirect: '/select-group',
       children: [
         {
           path: '/select-group',
