@@ -31,7 +31,7 @@
 
 .center {
   flex: 1;
-  padding: 20px;
+  padding: 30px;
   border-left: 1px solid var(--border-color);
   border-right: 1px solid var(--border-color);
 }
