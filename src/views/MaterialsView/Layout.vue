@@ -4,13 +4,21 @@
       <slot />
     </div>
     <div class="center">
-      <RouterView />
+      <RouterView v-slot="{ Component }">
+        <component :is="Component" :status="currentMaterialCom.status" :serialNum="1" />
+      </RouterView>
     </div>
     <div class="right"></div>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup>
+import { computed } from 'vue';
+import { useMaterialStore } from '@/stores/materialStore.ts';
+
+const materialStore = useMaterialStore();
+const currentMaterialCom = computed(() => materialStore.coms[materialStore.currentMaterialCom]);
+</script>
 
 <style scoped lang="scss">
 .layout {
