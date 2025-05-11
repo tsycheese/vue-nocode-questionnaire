@@ -13,6 +13,7 @@ import ItalicEditor from '@/components/ServeComs/Materials/EditItems/ItalicEdito
 import ColorEditor from '@/components/ServeComs/Materials/EditItems/ColorEditor.vue';
 import { markRaw } from 'vue';
 import { v4 as uuidv4 } from 'uuid';
+import type { ComStatus } from '@/types/common.ts';
 
 export default function () {
   return {
@@ -27,14 +28,14 @@ export default function () {
         status: '单选题默认标题',
         isShow: true,
         name: 'title-editor',
-        editor: markRaw(TitleEditor),
+        editCom: markRaw(TitleEditor),
       },
       desc: {
         id: uuidv4(),
         status: '单选题默认描述',
         isShow: true,
         name: 'desc-editor',
-        editor: markRaw(DescEditor),
+        editCom: markRaw(DescEditor),
       },
       // 选项
       options: {
@@ -43,7 +44,7 @@ export default function () {
         currentStatus: 0,
         isShow: true,
         name: 'options-editor',
-        editor: markRaw(OptionsEditor),
+        editCom: markRaw(OptionsEditor),
       },
 
       // 对齐方式
@@ -53,7 +54,7 @@ export default function () {
         currentStatus: 0,
         isShow: true,
         name: 'position-editor',
-        editor: markRaw(PositionEditor),
+        editCom: markRaw(PositionEditor),
       },
       titleSize: {
         id: uuidv4(),
@@ -61,7 +62,7 @@ export default function () {
         currentStatus: 0,
         isShow: true,
         name: 'size-editor',
-        editor: markRaw(SizeEditor),
+        editCom: markRaw(SizeEditor),
       },
       descSize: {
         id: uuidv4(),
@@ -69,7 +70,7 @@ export default function () {
         currentStatus: 0,
         isShow: true,
         name: 'size-editor',
-        editor: markRaw(SizeEditor),
+        editCom: markRaw(SizeEditor),
       },
       titleWeight: {
         id: uuidv4(),
@@ -77,7 +78,7 @@ export default function () {
         currentStatus: 1,
         isShow: true,
         name: 'weight-editor',
-        editor: markRaw(WeightEditor),
+        editCom: markRaw(WeightEditor),
       },
       descWeight: {
         id: uuidv4(),
@@ -85,7 +86,7 @@ export default function () {
         currentStatus: 1,
         isShow: true,
         name: 'weight-editor',
-        editor: markRaw(WeightEditor),
+        editCom: markRaw(WeightEditor),
       },
       titleItalic: {
         id: uuidv4(),
@@ -93,7 +94,7 @@ export default function () {
         currentStatus: 1,
         isShow: true,
         name: 'italic-editor',
-        editor: markRaw(ItalicEditor),
+        editCom: markRaw(ItalicEditor),
       },
       descItalic: {
         id: uuidv4(),
@@ -101,22 +102,22 @@ export default function () {
         currentStatus: 1,
         isShow: true,
         name: 'italic-editor',
-        editor: markRaw(ItalicEditor),
+        editCom: markRaw(ItalicEditor),
       },
       titleColor: {
         id: uuidv4(),
         status: '#000',
         isShow: true,
         name: 'color-editor',
-        editor: markRaw(ColorEditor),
+        editCom: markRaw(ColorEditor),
       },
       descColor: {
         id: uuidv4(),
         status: '#909399',
         isShow: true,
         name: 'color-editor',
-        editor: markRaw(ColorEditor),
+        editCom: markRaw(ColorEditor),
       },
     },
-  };
+  } as ComStatus;
 }
