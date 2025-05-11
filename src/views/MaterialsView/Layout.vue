@@ -1,20 +1,26 @@
 <template>
   <div class="layout">
+    <!-- 选择具体的业务组件 -->
     <div class="left">
       <slot />
     </div>
+    <!-- 显示对应的业务组件 -->
     <div class="center">
       <RouterView v-slot="{ Component }">
         <component :is="Component" :status="currentMaterialCom.status" :serialNum="1" />
       </RouterView>
     </div>
-    <div class="right"></div>
+    <!-- 编辑面板 -->
+    <div class="right">
+      <EditPanel />
+    </div>
   </div>
 </template>
 
 <script setup>
 import { computed } from 'vue';
 import { useMaterialStore } from '@/stores/materialStore.ts';
+import EditPanel from '@/components/ServeComs/EditItems/EditPannel.vue';
 
 const materialStore = useMaterialStore();
 const currentMaterialCom = computed(() => materialStore.coms[materialStore.currentMaterialCom]);
@@ -46,5 +52,6 @@ const currentMaterialCom = computed(() => materialStore.coms[materialStore.curre
 
 .right {
   width: 320px;
+  padding: 30px;
 }
 </style>
