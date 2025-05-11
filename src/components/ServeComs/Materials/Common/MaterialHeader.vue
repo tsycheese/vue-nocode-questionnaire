@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
+defineProps({
   serialNum: {
     type: Number,
     default: 1,
@@ -71,8 +71,6 @@ const props = defineProps({
     default: '#909399',
   },
 });
-
-console.log(props);
 </script>
 
 <style scoped lang="scss">
