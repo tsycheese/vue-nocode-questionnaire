@@ -11,7 +11,13 @@ export function addOptionStatus(optionsProps: OptionsProps) {
 }
 
 export function removeOptionStatus(optionsProps: OptionsProps, index: number) {
+  // 至少保留两个选项
+  if (optionsProps.status.length <= 2) {
+    return false;
+  }
   if (isStringArr(optionsProps.status)) {
     optionsProps.status.splice(index, 1);
+    return true;
   }
+  return false;
 }

@@ -21,13 +21,13 @@
 import { computed, provide } from 'vue';
 import { useMaterialStore } from '@/stores/materialStore.ts';
 import EditPanel from '@/components/ServeComs/Materials/EditItems/EditPanel.vue';
+import { ElMessage } from 'element-plus';
 
 const materialStore = useMaterialStore();
 const currentMaterialCom = computed(() => materialStore.coms[materialStore.currentMaterialCom]);
 
 // 使用依赖注入向后代组件提供更新状态的方法
 const updateStatus = (configKey: string, payload?: number | string | boolean) => {
-  console.log(configKey, payload);
   const CurProps = currentMaterialCom.value.status[configKey];
   switch (configKey) {
     case 'title':
@@ -41,7 +41,7 @@ const updateStatus = (configKey: string, payload?: number | string | boolean) =>
     case 'options': {
       if (typeof payload === 'number') {
         // 1. payload 是一个数字下标，用于删除选项
-        materialStore.removeOptionStatus(CurProps, payload);
+        materialStore.removeOptionStatus(CurProps, payload) || ElMessage.error('至少保留两个选项');
       } else {
         // 2. payload 不是数字下标（一般为 undefined），用于添加选项
         materialStore.addOptionStatus(CurProps);
