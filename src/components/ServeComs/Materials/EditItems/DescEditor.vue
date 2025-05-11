@@ -1,5 +1,26 @@
 <template>
-  <div>描述编辑组件</div>
+  <div class="desc-editor">
+    <div class="mb-10">描述</div>
+    <el-input placeholder="请输入内容" v-model="desc" @input="inputHandle"></el-input>
+  </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref, inject } from 'vue';
+
+const props = defineProps<{
+  id: string;
+  isShow: boolean;
+  name: string;
+  status: string;
+  configKey: string;
+}>();
+
+const desc = ref(props.status);
+
+const updateStatus = inject('updateStatus');
+
+const inputHandle = () => {
+  updateStatus(props.configKey, desc.value);
+};
+</script>
