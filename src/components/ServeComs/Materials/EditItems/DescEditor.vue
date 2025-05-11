@@ -1,6 +1,6 @@
 <template>
   <div class="desc-editor">
-    <div class="mb-10">描述</div>
+    <div class="mb-10">描述内容</div>
     <el-input placeholder="请输入内容" v-model="desc" @input="inputHandle"></el-input>
   </div>
 </template>
