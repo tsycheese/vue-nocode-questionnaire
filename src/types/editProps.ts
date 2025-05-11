@@ -17,12 +17,14 @@ export type PicTitleDescStatusArr = Array<{
   value: string;
 }>;
 
+export type OptionsStatusArr = StringStatusArr | ValueStatusArr | PicTitleDescStatusArr;
+
 export interface TextProps extends BaseProps {
   status: string;
 }
 
 export interface OptionsProps extends BaseProps {
-  status: StringStatusArr | ValueStatusArr | PicTitleDescStatusArr;
+  status: OptionsStatusArr;
   currentStatus: number; // 当前选中的索引
 }
 
@@ -47,4 +49,9 @@ export interface BaseStatus {
 // 因为不是所有业务组件都有 options 这个设置项，所以需要分开定义
 export interface OptionsStatus extends BaseStatus {
   options: OptionsProps;
+}
+
+// 判断是否是字符串数组
+export function isStringArr(status: OptionsStatusArr): status is StringStatusArr {
+  return Array.isArray(status) && status.every((item) => typeof item === 'string');
 }
