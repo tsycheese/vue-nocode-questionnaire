@@ -17,13 +17,28 @@
   </div>
 </template>
 
-<script setup>
-import { computed } from 'vue';
+<script setup lang="ts">
+import { computed, provide } from 'vue';
 import { useMaterialStore } from '@/stores/materialStore.ts';
 import EditPanel from '@/components/ServeComs/Materials/EditItems/EditPanel.vue';
 
 const materialStore = useMaterialStore();
 const currentMaterialCom = computed(() => materialStore.coms[materialStore.currentMaterialCom]);
+
+const updateStatus = (configKey: string, payload?: number | string | boolean) => {
+  const CurProps = currentMaterialCom.value.status[configKey];
+  switch (configKey) {
+    case 'title':
+    case 'desc': {
+      if (typeof payload !== 'string') {
+        console.error('Invalid payload type for "title or desc". Expected string.');
+      }
+      materialStore.setTextStatus(CurProps, payload as string);
+      break;
+    }
+  }
+};
+provide('updateStatus', updateStatus);
 </script>
 
 <style scoped lang="scss">
