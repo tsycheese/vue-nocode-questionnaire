@@ -12,7 +12,7 @@
     </div>
     <!-- 编辑面板 -->
     <div class="right">
-      <EditPanel />
+      <EditPanel :com="currentMaterialCom" />
     </div>
   </div>
 </template>
@@ -20,7 +20,7 @@
 <script setup>
 import { computed } from 'vue';
 import { useMaterialStore } from '@/stores/materialStore.ts';
-import EditPanel from '@/components/ServeComs/EditItems/EditPannel.vue';
+import EditPanel from '@/components/ServeComs/Materials/EditItems/EditPanel.vue';
 
 const materialStore = useMaterialStore();
 const currentMaterialCom = computed(() => materialStore.coms[materialStore.currentMaterialCom]);
