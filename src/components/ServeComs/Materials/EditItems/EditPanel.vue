@@ -1,6 +1,8 @@
 <template>
   <div class="edit-pannel">
-    <div>你好</div>
+    <div class="mb-20" v-for="(item, key) in com.status" :key="item.id">
+      <component :is="item.editCom" :config-key="key" v-bind="item"></component>
+    </div>
   </div>
 </template>
 
@@ -12,4 +14,9 @@ const props = defineProps<{
 }>();
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.edit-pannel {
+  font-size: var(--font-size-lg);
+  color: var(--black);
+}
+</style>
