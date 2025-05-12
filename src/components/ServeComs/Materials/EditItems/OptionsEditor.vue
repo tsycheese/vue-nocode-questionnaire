@@ -26,14 +26,15 @@ const props = defineProps<{
 const textArr = ref(props.status); // 选项数组
 
 // 注入更新状态方法
-const updateStatus = inject('updateStatus');
+const updateStatus =
+  inject<(configKey: string, payload?: number | string | boolean) => void>('updateStatus');
 // 添加选项
 const handleAdd = () => {
-  updateStatus(props.configKey);
+  updateStatus && updateStatus(props.configKey);
 };
 // 删除选项
 const handleRemove = (index: number) => {
-  updateStatus(props.configKey, index);
+  updateStatus && updateStatus(props.configKey, index);
 };
 </script>
 

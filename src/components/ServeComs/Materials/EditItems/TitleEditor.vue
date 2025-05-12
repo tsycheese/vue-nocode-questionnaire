@@ -18,9 +18,10 @@ const props = defineProps<{
 
 const title = ref(props.status);
 
-const updateStatus = inject('updateStatus');
+const updateStatus =
+  inject<(configKey: string, payload?: number | string | boolean) => void>('updateStatus');
 
 const inputHandle = () => {
-  updateStatus(props.configKey, title.value);
+  updateStatus && updateStatus(props.configKey, title.value);
 };
 </script>
