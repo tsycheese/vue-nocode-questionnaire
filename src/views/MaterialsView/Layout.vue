@@ -52,10 +52,14 @@ const updateStatus = (configKey: string, payload?: number | string | boolean) =>
     case 'titleSize':
     case 'descSize':
     case 'titleWeight':
-    case 'descWeight': {
-      // 居中设置 | 文字大小设置
+    case 'descWeight':
+    case 'titleItalic':
+    case 'descItalic': {
+      // 居中设置 | 文字大小设置 | 文字粗细设置 | 文字倾斜设置
       if (typeof payload !== 'number') {
-        console.error('Invalid payload type for "position or size or weight". Expected number.');
+        console.error(
+          'Invalid payload type for "position or size or weight or italic". Expected number.',
+        );
       }
       materialStore.setOptionsStatus(CurProps, payload as number);
       break;
@@ -92,5 +96,6 @@ provide('updateStatus', updateStatus);
 .right {
   width: 320px;
   padding: 30px;
+  overflow-y: scroll;
 }
 </style>
