@@ -21,3 +21,9 @@ export function removeOptionStatus(optionsProps: OptionsProps, index: number) {
   }
   return false;
 }
+
+export function setOptionsStatus(optionsProps: OptionsProps, index: number) {
+  if (isStringArr(optionsProps.status)) {
+    optionsProps.currentStatus = index;
+  }
+}
