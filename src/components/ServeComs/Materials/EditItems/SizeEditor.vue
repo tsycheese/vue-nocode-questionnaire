@@ -3,7 +3,7 @@
     <EditorButtonGroup :title="curTitle" :status="status[currentStatus]">
       <div class="options">
         <div class="option" :class="{ selected: currentStatus === 0 }" @click="curOption = 0">
-          <font-awesome-icon :icon="['fas', 'font']" size="lg" />
+          <font-awesome-icon :icon="['fas', 'font']" />
         </div>
         <div class="option" :class="{ selected: currentStatus === 1 }" @click="curOption = 1">
           <font-awesome-icon :icon="['fas', 'font']" size="sm" />
