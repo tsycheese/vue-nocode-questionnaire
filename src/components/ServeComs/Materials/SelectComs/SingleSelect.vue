@@ -14,8 +14,8 @@
       :descColor="computedStatus.descColor"
     />
     <div class="radio-group mt-10">
-      <el-radio-group>
-        <el-radio v-for="(item, index) in computedStatus.options" :value="item" :key="index">
+      <el-radio-group v-model="curSelected">
+        <el-radio v-for="(item, index) in computedStatus.options" :value="index" :key="index">
           {{ item }}
         </el-radio>
       </el-radio-group>
@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import MaterialHeader from '../Common/MaterialHeader.vue';
 import type { OptionsStatus } from '@/types/editProps.ts';
 import {
@@ -53,4 +53,6 @@ const computedStatus = computed(() => ({
   titleColor: getTextStatus(props.status.titleColor),
   descColor: getTextStatus(props.status.descColor),
 }));
+
+const curSelected = ref(0);
 </script>
