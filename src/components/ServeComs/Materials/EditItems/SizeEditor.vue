@@ -56,7 +56,7 @@ watch(curOption, (newVal) => {
 
 .option {
   box-sizing: border-box;
-  width: 43px;
+  padding: 0 15px;
   height: 32px;
   display: flex;
   justify-content: center;
