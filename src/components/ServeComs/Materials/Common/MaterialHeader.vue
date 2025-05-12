@@ -89,4 +89,8 @@ h2 {
   color: var(--font-color-light);
   text-indent: 5px;
 }
+
+.font-bold {
+  font-weight: bold;
+}
 </style>
