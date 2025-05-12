@@ -31,9 +31,11 @@ const updateStatus = (configKey: string, payload?: number | string | boolean) =>
   const CurProps = currentMaterialCom.value.status[configKey];
   switch (configKey) {
     case 'title':
-    case 'desc': {
+    case 'desc':
+    case 'titleColor':
+    case 'descColor': {
       if (typeof payload !== 'string') {
-        console.error('Invalid payload type for "title or desc". Expected string.');
+        console.error('Invalid payload type for "title or desc or color". Expected string.');
       }
       materialStore.setTextStatus(CurProps, payload as string);
       break;
