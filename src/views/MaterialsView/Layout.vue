@@ -48,10 +48,12 @@ const updateStatus = (configKey: string, payload?: number | string | boolean) =>
       }
       break;
     }
-    case 'position': {
-      // 居中设置
+    case 'position':
+    case 'titleSize':
+    case 'descSize': {
+      // 居中设置 | 文字大小设置
       if (typeof payload !== 'number') {
-        console.error('Invalid payload type for "position". Expected number.');
+        console.error('Invalid payload type for "position or size". Expected number.');
       }
       materialStore.setOptionsStatus(CurProps, payload as number);
       break;
