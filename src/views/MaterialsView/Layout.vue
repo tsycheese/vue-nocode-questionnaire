@@ -46,6 +46,15 @@ const updateStatus = (configKey: string, payload?: number | string | boolean) =>
         // 2. payload 不是数字下标（一般为 undefined），用于添加选项
         materialStore.addOptionStatus(CurProps);
       }
+      break;
+    }
+    case 'position': {
+      // 居中设置
+      if (typeof payload !== 'number') {
+        console.error('Invalid payload type for "position". Expected number.');
+      }
+      materialStore.setOptionsStatus(CurProps, payload as number);
+      break;
     }
   }
 };
