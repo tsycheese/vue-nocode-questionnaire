@@ -14,6 +14,13 @@ export function addOptionStatus(optionsProps: OptionsProps) {
   if (isStringArr(optionsProps.status)) {
     optionsProps.status.push('新选项');
   }
+  if (isPicTitleDescStatusArr(optionsProps.status)) {
+    optionsProps.status.push({
+      picTitle: '新选项标题',
+      picDesc: '新选项描述',
+      value: '',
+    });
+  }
 }
 
 export function removeOptionStatus(optionsProps: OptionsProps, index: number) {
@@ -21,7 +28,7 @@ export function removeOptionStatus(optionsProps: OptionsProps, index: number) {
   if (optionsProps.status.length <= 2) {
     return false;
   }
-  if (isStringArr(optionsProps.status)) {
+  if (isStringArr(optionsProps.status) || isPicTitleDescStatusArr(optionsProps.status)) {
     optionsProps.status.splice(index, 1);
     return true;
   }
@@ -35,10 +42,11 @@ export function setOptionsStatus(optionsProps: OptionsProps, index: number) {
 }
 
 export function setPicLinkByIndex(optionsProps: OptionsProps, payload: PicLink) {
-  console.log('optionsProps', optionsProps);
-  console.log('payload', payload);
   if (isPicTitleDescStatusArr(optionsProps.status)) {
     // 只适用于开发环境
     optionsProps.status[payload.index].value = 'http://localhost:3001' + payload.link;
+    if (payload.link === '') {
+      optionsProps.status[payload.index].value = '';
+    }
   }
 }
