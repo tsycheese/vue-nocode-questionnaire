@@ -43,6 +43,8 @@
 import { Plus, Compass } from '@element-plus/icons-vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { setActiveView } from '@/utils/webStorage.ts';
+import { ActiveView } from '@/utils/webStorage.ts';
 
 const router = useRouter();
 
@@ -56,10 +58,14 @@ const tableData = ref([
 ]);
 
 const goToCompMarket = () => {
+  // 设置当前活动视图为 MaterialView
+  setActiveView(ActiveView.Materials);
   router.push('/materials');
 };
 
 const goToEditor = () => {
+  // 设置当前活动视图为 EditorView
+  setActiveView(ActiveView.Editor);
   router.push('/editor');
 };
 </script>
