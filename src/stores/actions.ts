@@ -1,4 +1,10 @@
-import { isStringArr, type OptionsProps, type TextProps } from '@/types/editProps.ts';
+import {
+  isPicTitleDescStatusArr,
+  isStringArr,
+  type OptionsProps,
+  type PicLink,
+  type TextProps,
+} from '@/types/editProps.ts';
 
 export function setTextStatus(textProps: TextProps, text: string) {
   textProps.status = text;
@@ -25,5 +31,14 @@ export function removeOptionStatus(optionsProps: OptionsProps, index: number) {
 export function setOptionsStatus(optionsProps: OptionsProps, index: number) {
   if (isStringArr(optionsProps.status)) {
     optionsProps.currentStatus = index;
+  }
+}
+
+export function setPicLinkByIndex(optionsProps: OptionsProps, payload: PicLink) {
+  console.log('optionsProps', optionsProps);
+  console.log('payload', payload);
+  if (isPicTitleDescStatusArr(optionsProps.status)) {
+    // 只适用于开发环境
+    optionsProps.status[payload.index].value = 'http://localhost:3001' + payload.link;
   }
 }

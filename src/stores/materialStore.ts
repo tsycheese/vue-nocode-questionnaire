@@ -1,7 +1,13 @@
 // 组件市场里面所有组件状态的仓库
 import { defineStore } from 'pinia';
 import { defaultStatusMap } from '@/configs/defaultStatus/defaultStatusMap';
-import { addOptionStatus, removeOptionStatus, setTextStatus, setOptionsStatus } from './actions.ts';
+import {
+  addOptionStatus,
+  removeOptionStatus,
+  setTextStatus,
+  setOptionsStatus,
+  setPicLinkByIndex,
+} from './actions.ts';
 
 export const useMaterialStore = defineStore('materialStore', {
   state: () => ({
@@ -22,5 +28,6 @@ export const useMaterialStore = defineStore('materialStore', {
     addOptionStatus,
     removeOptionStatus,
     setOptionsStatus,
+    setPicLinkByIndex,
   },
 });
