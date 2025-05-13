@@ -22,12 +22,13 @@ import { computed, provide } from 'vue';
 import { useMaterialStore } from '@/stores/materialStore.ts';
 import EditPanel from '@/components/ServeComs/Materials/EditItems/EditPanel.vue';
 import { ElMessage } from 'element-plus';
+import { isPicLink, type PicLink } from '@/types/editProps.ts';
 
 const materialStore = useMaterialStore();
 const currentMaterialCom = computed(() => materialStore.coms[materialStore.currentMaterialCom]);
 
 // 使用依赖注入向后代组件提供更新状态的方法
-const updateStatus = (configKey: string, payload?: number | string | boolean) => {
+const updateStatus = (configKey: string, payload?: number | string | boolean | PicLink) => {
   const CurProps = currentMaterialCom.value.status[configKey];
   switch (configKey) {
     case 'title':
@@ -41,6 +42,11 @@ const updateStatus = (configKey: string, payload?: number | string | boolean) =>
       break;
     }
     case 'options': {
+      // payload 为 PicLink 类型时，是用于更新图片 options 状态的
+      if (typeof payload === 'object' && isPicLink(payload as object)) {
+        materialStore.setPicLinkByIndex(CurProps, payload);
+        break;
+      }
       if (typeof payload === 'number') {
         // 1. payload 是一个数字下标，用于删除选项
         materialStore.removeOptionStatus(CurProps, payload) || ElMessage.error('至少保留两个选项');
@@ -68,7 +74,14 @@ const updateStatus = (configKey: string, payload?: number | string | boolean) =>
     }
   }
 };
+
+// 用于更新图片链接的方法
+const getLink = (link: PicLink) => {
+  updateStatus('options', link);
+};
+
 provide('updateStatus', updateStatus);
+provide('getLink', getLink);
 </script>
 
 <style scoped lang="scss">
