@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { ref, inject, watch } from 'vue';
-import EditorButtonGroup from '../Common/EditorButtonGroup.vue';
+import EditorButtonGroup from './EditorButtonGroup.vue';
 
 const props = defineProps<{
   id: string;
