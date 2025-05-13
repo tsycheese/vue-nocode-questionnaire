@@ -14,6 +14,10 @@ export const useMaterialStore = defineStore('materialStore', {
     },
   }),
   actions: {
+    // 设置当前选中的组件
+    setCurrentMaterialCom(com: string) {
+      this.currentMaterialCom = com;
+    },
     setTextStatus,
     addOptionStatus,
     removeOptionStatus,
