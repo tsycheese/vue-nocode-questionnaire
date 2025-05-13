@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { useMaterialStore } from '@/stores/materialStore.ts';
+import { getActiveView } from '@/utils/webStorage.ts';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -85,6 +87,18 @@ const router = createRouter({
       ],
     },
   ],
+});
+
+router.beforeEach((to, from, next) => {
+  // 设置之前需要判断一下是否是组件市场
+  // 因为只有组件市场需要记录当前的组件
+  const activeView = getActiveView();
+  const store = useMaterialStore();
+  if (activeView === 'materials' && to.name) {
+    // 路由名称和对应的业务组件名称一致
+    store.setCurrentMaterialCom(to.name as string);
+  }
+  next();
 });
 
 export default router;
