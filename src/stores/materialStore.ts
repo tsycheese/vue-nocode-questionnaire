@@ -10,6 +10,7 @@ export const useMaterialStore = defineStore('materialStore', {
     // 记录所有的业务组件
     coms: {
       'single-select': defaultStatusMap['single-select'](),
+      'single-pic-select': defaultStatusMap['single-pic-select'](),
     },
   }),
   actions: {
