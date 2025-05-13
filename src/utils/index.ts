@@ -1,4 +1,4 @@
-import type { TextProps, OptionsProps } from '@/types/index.ts';
+import type { TextProps, OptionsProps, PicTitleDescStatusArr } from '@/types/index.ts';
 
 export function getTextStatus(props: TextProps): string {
   return props.status;
@@ -14,4 +14,8 @@ export function getCurrentStatus(props: OptionsProps): number {
 
 export function getStringStatusByCurrentStatus(props: OptionsProps): string {
   return props.status[props.currentStatus] as string;
+}
+
+export function getPicTitleDescStatusArr(props: OptionsProps): PicTitleDescStatusArr {
+  return props.status as PicTitleDescStatusArr;
 }
