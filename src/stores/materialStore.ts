@@ -25,6 +25,21 @@ export const useMaterialStore = defineStore('materialStore', {
     setCurrentMaterialCom(com: string) {
       this.currentMaterialCom = com;
     },
+    /**
+     *  设置说明文字状态，['标题', '段落']
+     */
+    changeTextType(index: number) {
+      const status = this.coms[this.currentMaterialCom].status;
+      if (this.currentMaterialCom === 'text-note' && status['type'].currentStatus !== index) {
+        status['type'].currentStatus = index;
+        // 改变标题和段落的显示状态
+        for (const key in status) {
+          if (key.startsWith('title') || key.startsWith('desc')) {
+            status[key].isShow = !status[key].isShow;
+          }
+        }
+      }
+    },
     setTextStatus,
     addOptionStatus,
     removeOptionStatus,
