@@ -47,7 +47,6 @@ const props = defineProps<{
   configKey: string;
 }>();
 const optionArr = ref(props.status); // 选项数组
-console.log(props);
 
 // 注入更新状态方法
 const updateStatus = inject('updateStatus');
