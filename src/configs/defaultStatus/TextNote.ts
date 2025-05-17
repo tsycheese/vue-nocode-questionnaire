@@ -26,7 +26,7 @@ export default function () {
       // 多一个type编辑项
       type: {
         id: uuidv4(),
-        status: ['标题', '描述'],
+        status: ['标题', '段落'],
         currentStatus: 1,
         isShow: true,
         name: 'text-type-editor',
@@ -36,7 +36,7 @@ export default function () {
       title: {
         id: uuidv4(),
         status: '单选题默认标题',
-        isShow: true,
+        isShow: false,
         name: 'title-editor',
         editCom: markRaw(TitleEditor),
       },
@@ -61,7 +61,7 @@ export default function () {
         id: uuidv4(),
         status: ['22', '20', '18'],
         currentStatus: 0,
-        isShow: true,
+        isShow: false,
         name: 'size-editor',
         editCom: markRaw(SizeEditor),
       },
@@ -77,7 +77,7 @@ export default function () {
         id: uuidv4(),
         status: ['加粗', '正常'],
         currentStatus: 1,
-        isShow: true,
+        isShow: false,
         name: 'weight-editor',
         editCom: markRaw(WeightEditor),
       },
@@ -93,7 +93,7 @@ export default function () {
         id: uuidv4(),
         status: ['斜体', '正常'],
         currentStatus: 1,
-        isShow: true,
+        isShow: false,
         name: 'italic-editor',
         editCom: markRaw(ItalicEditor),
       },
@@ -108,7 +108,7 @@ export default function () {
       titleColor: {
         id: uuidv4(),
         status: '#000',
-        isShow: true,
+        isShow: false,
         name: 'color-editor',
         editCom: markRaw(ColorEditor),
       },
