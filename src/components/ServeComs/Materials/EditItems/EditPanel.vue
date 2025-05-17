@@ -1,7 +1,7 @@
 <template>
   <div class="edit-pannel">
     <div class="mb-20" v-for="(item, key) in com.status" :key="item.id">
-      <component :is="item.editCom" :config-key="key" v-bind="item"></component>
+      <component v-if="item.isShow" :is="item.editCom" :config-key="key" v-bind="item"></component>
     </div>
   </div>
 </template>
