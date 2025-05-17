@@ -37,6 +37,7 @@ const updateStatus = (configKey: string, payload?: number | string | boolean | P
     case 'descColor': {
       if (typeof payload !== 'string') {
         console.error('Invalid payload type for "title or desc or color". Expected string.');
+        break;
       }
       materialStore.setTextStatus(CurProps, payload as string);
       break;
@@ -68,8 +69,18 @@ const updateStatus = (configKey: string, payload?: number | string | boolean | P
         console.error(
           'Invalid payload type for "position or size or weight or italic". Expected number.',
         );
+        break;
       }
       materialStore.setOptionsStatus(CurProps, payload as number);
+      break;
+    }
+    case 'type': {
+      // 说明文字类型设置
+      if (typeof payload !== 'number') {
+        console.error('Invalid payload type for "type". Expected number.');
+        break;
+      }
+      materialStore.changeTextType(payload);
       break;
     }
   }
