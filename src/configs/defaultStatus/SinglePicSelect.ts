@@ -3,14 +3,14 @@
 
 import SinglePicSelect from '@/components/ServeComs/Materials/SelectComs/SinglePicSelect.vue';
 
-import TitleEditor from '@/components/ServeComs/Materials/EditItems/TitleEditor.vue';
-import DescEditor from '@/components/ServeComs/Materials/EditItems/DescEditor.vue';
-import PicOptionsEditor from '@/components/ServeComs/Materials/EditItems/PicOptionsEditor.vue';
-import PositionEditor from '@/components/ServeComs/Materials/EditItems/PositionEditor.vue';
-import SizeEditor from '@/components/ServeComs/Materials/EditItems/SizeEditor.vue';
-import WeightEditor from '@/components/ServeComs/Materials/EditItems/WeightEditor.vue';
-import ItalicEditor from '@/components/ServeComs/Materials/EditItems/ItalicEditor.vue';
-import ColorEditor from '@/components/ServeComs/Materials/EditItems/ColorEditor.vue';
+import TitleEditor from '@/components/ServeComs/EditItems/TitleEditor.vue';
+import DescEditor from '@/components/ServeComs/EditItems/DescEditor.vue';
+import PicOptionsEditor from '@/components/ServeComs/EditItems/PicOptionsEditor.vue';
+import PositionEditor from '@/components/ServeComs/EditItems/PositionEditor.vue';
+import SizeEditor from '@/components/ServeComs/EditItems/SizeEditor.vue';
+import WeightEditor from '@/components/ServeComs/EditItems/WeightEditor.vue';
+import ItalicEditor from '@/components/ServeComs/EditItems/ItalicEditor.vue';
+import ColorEditor from '@/components/ServeComs/EditItems/ColorEditor.vue';
 import { markRaw } from 'vue';
 import { v4 as uuidv4 } from 'uuid';
 import type { ComStatus } from '@/types/common.ts';

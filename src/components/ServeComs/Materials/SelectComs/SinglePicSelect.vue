@@ -31,8 +31,8 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import type { OptionsStatus } from '@/types/editProps.ts';
-import MaterialHeader from '../Common/MaterialHeader.vue';
-import PicItem from '../Common/PicItem.vue';
+import MaterialHeader from '../../Common/MaterialHeader.vue';
+import PicItem from '../../Common/PicItem.vue';
 import {
   getTextStatus,
   getCurrentStatus,

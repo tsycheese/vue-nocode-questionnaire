@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import MaterialHeader from '../Common/MaterialHeader.vue';
+import MaterialHeader from '../../Common/MaterialHeader.vue';
 import type { OptionsStatus } from '@/types/editProps.ts';
 import {
   getTextStatus,
