@@ -8,6 +8,20 @@ import {
   setOptionsStatus,
   setPicLinkByIndex,
 } from './actions.ts';
+import type { Material } from '@/types/store.ts';
+import type { ComStatus } from '@/types/common.ts';
+import { updateInitStatusBeforeAdd } from '@/utils/index.ts';
+
+// 哪些业务组件需要初始化
+const keyToInit = ['personal-info-gender', 'personal-info-education'] as Material[];
+
+const initializedStates: { [key: string]: ComStatus } = {};
+
+keyToInit.forEach((key) => {
+  const defaultStatus = defaultStatusMap[key]() as ComStatus;
+  updateInitStatusBeforeAdd(defaultStatus, key);
+  initializedStates[key] = defaultStatus;
+});
 
 export const useMaterialStore = defineStore('materialStore', {
   state: () => ({
@@ -18,6 +32,8 @@ export const useMaterialStore = defineStore('materialStore', {
       'single-select': defaultStatusMap['single-select'](),
       'single-pic-select': defaultStatusMap['single-pic-select'](),
       'text-note': defaultStatusMap['text-note'](),
+      'personal-info-gender': initializedStates['personal-info-gender'],
+      'personal-info-education': initializedStates['personal-info-education'],
     },
   }),
   actions: {
