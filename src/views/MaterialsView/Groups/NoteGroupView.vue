@@ -3,7 +3,9 @@
     <!-- 左侧 -->
     <!-- 备注说明 -->
     <template #default>
-      <RouterLink class="link-item mb-15" to="/text-note"> 备注说明 </RouterLink>
+      <RouterLink class="link-item mb-15" active-class="link-item-active" to="/text-note">
+        备注说明
+      </RouterLink>
     </template>
   </Layout>
 </template>

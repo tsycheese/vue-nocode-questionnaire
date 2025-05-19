@@ -3,7 +3,9 @@
     <!-- 左侧 -->
     <!-- 文本输入 -->
     <template #default>
-      <RouterLink class="link-item mb-15" to="/text-input"> 文本输入 </RouterLink>
+      <RouterLink class="link-item mb-15" active-class="link-item-active" to="/text-input">
+        文本输入
+      </RouterLink>
     </template>
   </Layout>
 </template>
