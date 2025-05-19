@@ -14,6 +14,19 @@ const router = createRouter({
       path: '/editor',
       name: 'editor',
       component: () => import('@/views/EditorView/index.vue'),
+      redirect: '/editor/serve-type',
+      children: [
+        {
+          path: '/editor/serve-type',
+          name: 'serve-type',
+          component: () => import('@/views/EditorView/LeftSide/ServeTypeView.vue'),
+        },
+        {
+          path: '/editor/outline',
+          name: 'outline',
+          component: () => import('@/views/EditorView/LeftSide/OutlineView.vue'),
+        },
+      ],
     },
     {
       path: '/materials',
