@@ -46,6 +46,11 @@ export interface BaseStatus {
   descColor: TextProps;
 }
 
+// 因为不是所有业务组件都有 options 这个设置项，所以需要分开定义
+export interface OptionsStatus extends BaseStatus {
+  options: OptionsProps;
+}
+
 export interface TypeStatus extends BaseStatus {
   type: OptionsProps;
 }
@@ -56,11 +61,6 @@ export function isOptionsStatus(status: BaseStatus): status is OptionsStatus {
 
 export function isTypeStatus(status: BaseStatus): status is TypeStatus {
   return 'type' in status;
-}
-
-// 因为不是所有业务组件都有 options 这个设置项，所以需要分开定义
-export interface OptionsStatus extends BaseStatus {
-  options: OptionsProps;
 }
 
 // 判断是否是字符串数组
