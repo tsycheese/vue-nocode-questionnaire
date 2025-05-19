@@ -36,9 +36,7 @@ export function removeOptionStatus(optionsProps: OptionsProps, index: number) {
 }
 
 export function setOptionsStatus(optionsProps: OptionsProps, index: number) {
-  if (isStringArr(optionsProps.status)) {
-    optionsProps.currentStatus = index;
-  }
+  optionsProps.currentStatus = index;
 }
 
 export function setPicLinkByIndex(optionsProps: OptionsProps, payload: PicLink) {
