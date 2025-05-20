@@ -22,9 +22,13 @@ import Center from './Center/index.vue';
 import RightSide from './RightSide/index.vue';
 import eventBus from '@/utils/eventBus.ts';
 import { useTemplateRef } from 'vue';
+import { useEditorStore } from '@/stores/editorStore.ts';
+import { computed, provide } from 'vue';
+import { isPicLink, type PicLink } from '@/types/editProps.ts';
+import { ElMessage } from 'element-plus';
 
+// 滚动行为控制，当添加新组件时，滚动到底部
 const containerRef = useTemplateRef<HTMLDivElement>('container');
-
 eventBus.on('scrollToBottom', () => {
   if (containerRef.value) {
     containerRef.value.scrollTo({
@@ -33,6 +37,78 @@ eventBus.on('scrollToBottom', () => {
     });
   }
 });
+
+// ---------------------------------------
+const editorStore = useEditorStore();
+const currentMaterialCom = computed(() => editorStore.coms[editorStore.currentComIndex]);
+
+// 使用依赖注入向后代组件提供更新状态的方法
+const updateStatus = (configKey: string, payload?: number | string | boolean | PicLink) => {
+  // @ts-ignore
+  const CurProps = currentMaterialCom.value.status[configKey];
+  switch (configKey) {
+    case 'title':
+    case 'desc':
+    case 'titleColor':
+    case 'descColor': {
+      if (typeof payload !== 'string') {
+        console.error('Invalid payload type for "title or desc or color". Expected string.');
+        break;
+      }
+      editorStore.setTextStatus(CurProps, payload as string);
+      break;
+    }
+    case 'options': {
+      // payload 为 PicLink 类型时，是用于更新图片 options 状态的
+      if (typeof payload === 'object' && isPicLink(payload as object)) {
+        editorStore.setPicLinkByIndex(CurProps, payload);
+        break;
+      }
+      if (typeof payload === 'number') {
+        // 1. payload 是一个数字下标，用于删除选项
+        editorStore.removeOptionStatus(CurProps, payload) || ElMessage.error('至少保留两个选项');
+      } else {
+        // 2. payload 不是数字下标（一般为 undefined），用于添加选项
+        editorStore.addOptionStatus(CurProps);
+      }
+      break;
+    }
+    case 'position':
+    case 'titleSize':
+    case 'descSize':
+    case 'titleWeight':
+    case 'descWeight':
+    case 'titleItalic':
+    case 'descItalic': {
+      // 居中设置 | 文字大小设置 | 文字粗细设置 | 文字倾斜设置
+      if (typeof payload !== 'number') {
+        console.error(
+          'Invalid payload type for "position or size or weight or italic". Expected number.',
+        );
+        break;
+      }
+      editorStore.setOptionsStatus(CurProps, payload as number);
+      break;
+    }
+    case 'type': {
+      // 说明文字类型设置
+      if (typeof payload !== 'number') {
+        console.error('Invalid payload type for "type". Expected number.');
+        break;
+      }
+      editorStore.changeTextType(payload);
+      break;
+    }
+  }
+};
+
+// 用于更新图片链接的方法
+const getLink = (link: PicLink) => {
+  updateStatus('options', link);
+};
+
+provide('updateStatus', updateStatus);
+provide('getLink', getLink);
 </script>
 
 <style scoped lang="scss">
@@ -78,7 +154,7 @@ eventBus.on('scrollToBottom', () => {
 
 .center {
   width: calc(100vw - 40px - 300px - 330px - 40px);
-  margin-left: 320px;
+  margin-left: 310px;
   margin-bottom: 150px;
 
   .center-inner {
