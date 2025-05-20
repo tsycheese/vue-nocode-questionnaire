@@ -3,12 +3,16 @@ import type { OptionProps } from 'element-plus/es/components/select/src/type.mjs
 import type { PicLink } from './editProps.ts';
 import type { ComStatus } from './common.ts';
 
+// 记录题目类型的数组
+export const SurveyComNameArr = [
+  'single-select',
+  'single-pic-select',
+  'personal-info-gender',
+  'personal-info-education',
+] as const;
+
 // 题目类型
-export type SurveyComName =
-  | 'single-select'
-  | 'single-pic-select'
-  | 'personal-info-gender'
-  | 'personal-info-education';
+export type SurveyComName = (typeof SurveyComNameArr)[number];
 
 // 业务组件类型（题目类型 + 非题目类型）
 export type Material = SurveyComName | 'title-note';
@@ -27,4 +31,8 @@ export interface MaterialStore extends Actions {
   currentMaterialCom: Material;
   coms: Record<Material, ComStatus>;
   setCurrentMaterialCom: (material: Material) => void;
+}
+
+export function isServeComName(name: string): name is SurveyComName {
+  return SurveyComNameArr.includes(name as SurveyComName);
 }
