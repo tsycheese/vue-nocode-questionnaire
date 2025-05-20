@@ -30,6 +30,7 @@ const curOption = ref(props.currentStatus);
 const updateStatus = inject('updateStatus');
 
 watch(curOption, (newVal) => {
+  // @ts-ignore
   updateStatus && updateStatus(props.configKey, newVal);
 });
 </script>

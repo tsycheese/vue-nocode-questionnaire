@@ -52,11 +52,12 @@ const optionArr = ref(props.status); // 选项数组
 const updateStatus = inject('updateStatus');
 // 添加选项
 const handleAdd = () => {
+  // @ts-ignore
   updateStatus && updateStatus(props.configKey);
 };
 // 删除选项
 const handleRemove = (index: number) => {
-  console.log(index);
+  // @ts-ignore
   updateStatus && updateStatus(props.configKey, index);
 };
 // 删除图片
@@ -71,6 +72,7 @@ const deletePic = (index: number) => {
       index,
       link: '',
     };
+    // @ts-ignore
     updateStatus && updateStatus(props.configKey, payload);
   });
 };

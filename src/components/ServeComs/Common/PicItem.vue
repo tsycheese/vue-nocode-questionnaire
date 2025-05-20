@@ -36,6 +36,7 @@ const props = defineProps(['title', 'desc', 'url', 'index']);
 const getLink = inject('getLink');
 
 const handleImageUpload = (response: any) => {
+  // @ts-ignore
   getLink({
     link: response.imageUrl,
     index: props.index,

@@ -18,6 +18,7 @@ const keyToInit = ['personal-info-gender', 'personal-info-education'] as Materia
 const initializedStates: { [key: string]: ComStatus } = {};
 
 keyToInit.forEach((key) => {
+  // @ts-ignore
   const defaultStatus = defaultStatusMap[key]() as ComStatus;
   updateInitStatusBeforeAdd(defaultStatus, key);
   initializedStates[key] = defaultStatus;
@@ -45,6 +46,7 @@ export const useMaterialStore = defineStore('materialStore', {
      *  设置说明文字状态，['标题', '段落']
      */
     changeTextType(index: number) {
+      // @ts-ignore
       const status = this.coms[this.currentMaterialCom].status;
       if (this.currentMaterialCom === 'text-note' && status['type'].currentStatus !== index) {
         status['type'].currentStatus = index;

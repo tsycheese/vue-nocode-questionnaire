@@ -25,6 +25,7 @@ import { ElMessage } from 'element-plus';
 import { isPicLink, type PicLink } from '@/types/editProps.ts';
 
 const materialStore = useMaterialStore();
+// @ts-ignore
 const currentMaterialCom = computed(() => materialStore.coms[materialStore.currentMaterialCom]);
 
 // 使用依赖注入向后代组件提供更新状态的方法
