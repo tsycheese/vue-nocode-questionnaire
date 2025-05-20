@@ -39,6 +39,9 @@ export const useEditorStore = defineStore('editorStore', {
       this.currentComIndex = -1;
       if (isServeComName(newCom.name)) this.serveCount++;
     },
+    setCurrentComIndex(index: number) {
+      this.currentComIndex = index;
+    },
     setTextStatus,
     addOptionStatus,
     removeOptionStatus,
