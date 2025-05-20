@@ -1,18 +1,31 @@
 <template>
-  <div class="serve-com-item">{{ comName }}</div>
+  <div class="serve-com-item" @click="addServeCom">{{ comName }}</div>
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
-  materialName: {
-    type: String,
-    default: '',
-  },
-  comName: {
-    type: String,
-    default: '',
-  },
-});
+import { defaultStatusMap } from '@/configs/defaultStatus/defaultStatusMap.ts';
+import { useEditorStore } from '@/stores/editorStore.ts';
+import type { Material } from '@/types/store.ts';
+import { updateInitStatusBeforeAdd } from '@/utils/index.ts';
+import eventBus from '@/utils/eventBus.ts';
+
+const props = defineProps<{
+  materialName: Material;
+  comName: string;
+}>();
+const editorStore = useEditorStore();
+
+const addServeCom = () => {
+  if (!defaultStatusMap.hasOwnProperty(props.materialName)) {
+    console.warn(`没有找到${props.materialName}的默认状态`);
+    return;
+  }
+  // @ts-ignore
+  let newCom = defaultStatusMap[props.materialName]();
+  updateInitStatusBeforeAdd(newCom, props.materialName);
+  editorStore.addCom(newCom);
+  eventBus.emit('scrollToBottom');
+};
 </script>
 
 <style scoped lang="scss">
