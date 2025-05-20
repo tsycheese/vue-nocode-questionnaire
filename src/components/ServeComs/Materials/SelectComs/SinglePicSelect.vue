@@ -14,7 +14,11 @@
       :descColor="computedStatus.descColor"
     />
     <div class="mt-10">
-      <el-radio-group v-model="curSelected" class="pic-radio-group">
+      <el-radio-group
+        v-model="curSelected"
+        class="pic-radio-group"
+        :class="{ 'space-evenly': !!computedStatus.position }"
+      >
         <el-radio
           class="pic-option"
           v-for="(item, index) in computedStatus.options"
@@ -63,9 +67,9 @@ const curSelected = ref(0);
 
 <style scoped lang="scss">
 .pic-radio-group {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  row-gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .pic-option {
