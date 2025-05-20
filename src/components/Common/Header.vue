@@ -25,6 +25,7 @@ const imgUrl = ref('https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4ac
   justify-content: space-between;
   height: 50px;
   border-bottom: 1px solid var(--border-color);
+  background-color: var(--white);
 }
 
 .left {
