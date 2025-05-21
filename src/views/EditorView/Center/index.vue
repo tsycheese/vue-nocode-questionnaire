@@ -13,7 +13,11 @@
         :class="{ active: index === curComIndex }"
         @click="changeCurCom(index)"
       >
-        <component :is="element.type" :status="element.status" :serialNum="1"></component>
+        <component
+          :is="element.type"
+          :status="element.status"
+          :serialNum="serveNo[index]"
+        ></component>
       </div>
     </VueDraggable>
   </div>
@@ -21,11 +25,23 @@
 
 <script setup lang="ts">
 import { useEditorStore } from '@/stores/editorStore.ts';
-import { computed } from 'vue';
+import { computed, watch, nextTick } from 'vue';
 import { VueDraggable } from 'vue-draggable-plus';
+import { useServeNo } from '@/hooks/useServeNo.ts';
 
 const editorStore = useEditorStore();
 const curComIndex = computed(() => editorStore.currentComIndex);
+let serveNo = useServeNo(editorStore.coms);
+
+watch(
+  () => editorStore.coms,
+  () => {
+    serveNo = useServeNo(editorStore.coms);
+  },
+  {
+    deep: true,
+  },
+);
 
 const changeCurCom = (index: number) => {
   editorStore.setCurrentComIndex(index);
