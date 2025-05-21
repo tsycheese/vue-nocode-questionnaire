@@ -1,20 +1,23 @@
 <template>
   <div class="center-container">
-    <div
-      class="serve-com-item"
-      :class="{ active: curComIndex === index }"
-      v-for="(com, index) in editorStore.coms"
-      :key="com.id"
-      @click="changeCurCom(index)"
-    >
-      <component :is="com.type" :status="com.status" :serialNum="1"></component>
-    </div>
+    <VueDraggable v-model="editorStore.coms" group="serve-coms" item-key="id">
+      <div
+        v-for="(element, index) in editorStore.coms"
+        :key="element.id"
+        class="serve-com-item"
+        :class="{ active: index === curComIndex }"
+        @click="changeCurCom(index)"
+      >
+        <component :is="element.type" :status="element.status" :serialNum="1"></component>
+      </div>
+    </VueDraggable>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useEditorStore } from '@/stores/editorStore.ts';
 import { computed } from 'vue';
+import { VueDraggable } from 'vue-draggable-plus';
 
 const editorStore = useEditorStore();
 const curComIndex = computed(() => editorStore.currentComIndex);
@@ -35,6 +38,7 @@ const changeCurCom = (index: number) => {
   padding: 10px;
   cursor: pointer;
   transition: 0.2s;
+  border-bottom: 1px solid #eaeaea;
 
   &:hover,
   &.active {
