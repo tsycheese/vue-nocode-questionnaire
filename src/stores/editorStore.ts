@@ -42,6 +42,9 @@ export const useEditorStore = defineStore('editorStore', {
     setCurrentComIndex(index: number) {
       this.currentComIndex = index;
     },
+    removeCom(index: number) {
+      this.coms.splice(index, 1);
+    },
     setTextStatus,
     addOptionStatus,
     removeOptionStatus,
