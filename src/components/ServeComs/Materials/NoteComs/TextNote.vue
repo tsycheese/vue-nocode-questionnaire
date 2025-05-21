@@ -32,7 +32,7 @@ import { getTextStatus, getCurrentStatus, getStringStatusByCurrentStatus } from 
 
 const props = defineProps<{
   status: TypeStatus;
-  serialNum: number;
+  serialNum: number | null;
 }>();
 
 const computedStatus = computed(() => ({
