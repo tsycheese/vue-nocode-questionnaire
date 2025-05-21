@@ -25,6 +25,7 @@ import { useEditorStore } from '@/stores/editorStore.ts';
 import { computed, watch } from 'vue';
 import { VueDraggable } from 'vue-draggable-plus';
 import { useServeNo } from '@/hooks/useServeNo.ts';
+import eventBus from '@/utils/eventBus.ts';
 
 const editorStore = useEditorStore();
 const curComIndex = computed(() => editorStore.currentComIndex);
@@ -42,6 +43,7 @@ watch(
 
 const changeCurCom = (index: number) => {
   editorStore.setCurrentComIndex(index);
+  eventBus.emit('scrollToCenter', index);
 };
 const handleDragStart = (e: DragEvent) => {
   // 清除当前选中的组件索引

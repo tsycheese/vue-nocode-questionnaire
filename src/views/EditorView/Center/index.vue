@@ -8,6 +8,7 @@
     >
       <div
         v-for="(element, index) in editorStore.coms"
+        ref="serve-com-item"
         :key="element.id"
         class="serve-com-item"
         :class="{ active: index === curComIndex }"
@@ -28,10 +29,13 @@ import { useEditorStore } from '@/stores/editorStore.ts';
 import { computed, watch, nextTick } from 'vue';
 import { VueDraggable } from 'vue-draggable-plus';
 import { useServeNo } from '@/hooks/useServeNo.ts';
+import eventBus from '@/utils/eventBus.ts';
+import { useTemplateRef } from 'vue';
 
 const editorStore = useEditorStore();
 const curComIndex = computed(() => editorStore.currentComIndex);
 let serveNo = useServeNo(editorStore.coms);
+const componentsRefs = useTemplateRef<HTMLElement[]>('serve-com-item');
 
 watch(
   () => editorStore.coms,
@@ -45,11 +49,29 @@ watch(
 
 const changeCurCom = (index: number) => {
   editorStore.setCurrentComIndex(index);
+  eventBus.emit('scrollToCenter', index);
 };
 const handleDragStart = (e: DragEvent) => {
   // 清除当前选中的组件索引
   editorStore.setCurrentComIndex(-1);
 };
+
+// 滚动行为控制，当选中组件时，滚动到组件的中心
+const scrollToCenter = (index: number) => {
+  nextTick(() => {
+    // @ts-ignore 获取当前题目的dom元素
+    const element = componentsRefs.value[index];
+    console.log(index);
+    // 判断当前元素是否是HTMLElement
+    if (element instanceof HTMLElement) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
+    }
+  });
+};
+eventBus.on('scrollToCenter', scrollToCenter);
 </script>
 
 <style scoped lang="scss">
