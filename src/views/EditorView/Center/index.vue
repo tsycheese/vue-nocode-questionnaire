@@ -1,6 +1,11 @@
 <template>
   <div class="center-container">
-    <VueDraggable v-model="editorStore.coms" group="serve-coms" item-key="id">
+    <VueDraggable
+      v-model="editorStore.coms"
+      group="serve-coms"
+      item-key="id"
+      @dragstart="handleDragStart"
+    >
       <div
         v-for="(element, index) in editorStore.coms"
         :key="element.id"
@@ -24,6 +29,10 @@ const curComIndex = computed(() => editorStore.currentComIndex);
 
 const changeCurCom = (index: number) => {
   editorStore.setCurrentComIndex(index);
+};
+const handleDragStart = (e: DragEvent) => {
+  // 清除当前选中的组件索引
+  editorStore.setCurrentComIndex(-1);
 };
 </script>
 
