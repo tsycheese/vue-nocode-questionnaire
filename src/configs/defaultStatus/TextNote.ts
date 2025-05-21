@@ -59,7 +59,7 @@ export default function () {
       },
       titleSize: {
         id: uuidv4(),
-        status: ['22', '20', '18'],
+        status: ['26', '24', '22'],
         currentStatus: 0,
         isShow: false,
         name: 'size-editor',
