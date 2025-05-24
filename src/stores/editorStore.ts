@@ -9,6 +9,8 @@ import {
 } from './actions.ts';
 import type { TypeStatus } from '@/types/editProps.ts';
 import { isSurveyComName } from '@/types/store.ts';
+import type { SurveyDBData } from '@/types/db.ts';
+import { saveSurvey } from '@/db/operation.ts';
 
 export const useEditorStore = defineStore('editorStore', {
   state: () => ({
@@ -44,6 +46,10 @@ export const useEditorStore = defineStore('editorStore', {
     },
     removeCom(index: number) {
       this.coms.splice(index, 1);
+    },
+    // 保存问卷数到数据库中
+    async saveSurveyToDB(data: SurveyDBData) {
+      return saveSurvey(data);
     },
     setTextStatus,
     addOptionStatus,

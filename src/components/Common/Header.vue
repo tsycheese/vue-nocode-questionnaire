@@ -5,7 +5,9 @@
     </div>
     <div class="center">
       <div v-if="isEditor">
-        <el-button class="btn" type="success" size="small">保存问卷</el-button>
+        <el-button class="btn" type="success" size="small" @click="handleSaveSurvey">
+          保存问卷
+        </el-button>
       </div>
     </div>
     <div class="right">
@@ -18,6 +20,9 @@
 import { ArrowLeft } from '@element-plus/icons-vue';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
+import { useEditorStore } from '@/stores/editorStore.ts';
+import { ElMessage, ElMessageBox } from 'element-plus';
+import type { SurveyDBData } from '@/types/db.ts';
 
 defineProps({
   isEditor: {
@@ -28,6 +33,35 @@ defineProps({
 
 const router = useRouter();
 const imgUrl = ref('https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif');
+const editorStore = useEditorStore();
+
+const handleSaveSurvey = () => {
+  ElMessageBox.prompt('请输入问卷标题', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'info',
+  })
+    .then(({ value }) => {
+      const surveyData: SurveyDBData = {
+        createDate: new Date().getTime(),
+        updateDate: new Date().getTime(),
+        title: value,
+        surveyCount: editorStore.surveyCount,
+        coms: editorStore.coms,
+      };
+      editorStore
+        .saveSurveyToDB(surveyData)
+        .then(() => {
+          ElMessage.success('问卷保存成功');
+        })
+        .catch((error) => {
+          ElMessage.error('问卷保存失败');
+        });
+    })
+    .catch(() => {
+      ElMessage.info('取消保存');
+    });
+};
 </script>
 
 <style scoped lang="scss">
