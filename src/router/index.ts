@@ -14,12 +14,12 @@ const router = createRouter({
       path: '/editor',
       name: 'editor',
       component: () => import('@/views/EditorView/index.vue'),
-      redirect: '/editor/serve-type',
+      redirect: '/editor/survey-type',
       children: [
         {
-          path: '/editor/serve-type',
-          name: 'serve-type',
-          component: () => import('@/views/EditorView/LeftSide/ServeTypeView.vue'),
+          path: '/editor/survey-type',
+          name: 'survey-type',
+          component: () => import('@/views/EditorView/LeftSide/SurveyTypeView.vue'),
         },
         {
           path: '/editor/outline',
@@ -44,31 +44,31 @@ const router = createRouter({
               path: '/single-select',
               name: 'single-select',
               component: () =>
-                import('@/components/ServeComs/Materials/SelectComs/SingleSelect.vue'),
+                import('@/components/SurveyComs/Materials/SelectComs/SingleSelect.vue'),
             },
             {
               path: '/multi-select',
               name: 'multi-select',
               component: () =>
-                import('@/components/ServeComs/Materials/SelectComs/MultiSelect.vue'),
+                import('@/components/SurveyComs/Materials/SelectComs/MultiSelect.vue'),
             },
             {
               path: '/option-select',
               name: 'option-select',
               component: () =>
-                import('@/components/ServeComs/Materials/SelectComs/OptionSelect.vue'),
+                import('@/components/SurveyComs/Materials/SelectComs/OptionSelect.vue'),
             },
             {
               path: '/single-pic-select',
               name: 'single-pic-select',
               component: () =>
-                import('@/components/ServeComs/Materials/SelectComs/SinglePicSelect.vue'),
+                import('@/components/SurveyComs/Materials/SelectComs/SinglePicSelect.vue'),
             },
             {
               path: '/multi-pic-select',
               name: 'multi-pic-select',
               component: () =>
-                import('@/components/ServeComs/Materials/SelectComs/MultiPicSelect.vue'),
+                import('@/components/SurveyComs/Materials/SelectComs/MultiPicSelect.vue'),
             },
           ],
         },
@@ -91,7 +91,7 @@ const router = createRouter({
             {
               path: '/text-note',
               name: 'text-note',
-              component: () => import('@/components/ServeComs/Materials/NoteComs/TextNote.vue'),
+              component: () => import('@/components/SurveyComs/Materials/NoteComs/TextNote.vue'),
             },
           ],
         },
@@ -105,13 +105,13 @@ const router = createRouter({
               path: '/personal-info-gender',
               name: 'personal-info-gender',
               component: () =>
-                import('@/components/ServeComs/Materials/SelectComs/SingleSelect.vue'),
+                import('@/components/SurveyComs/Materials/SelectComs/SingleSelect.vue'),
             },
             {
               path: '/personal-info-education',
               name: 'personal-info-education',
               component: () =>
-                import('@/components/ServeComs/Materials/SelectComs/SingleSelect.vue'),
+                import('@/components/SurveyComs/Materials/SelectComs/SingleSelect.vue'),
             },
           ],
         },

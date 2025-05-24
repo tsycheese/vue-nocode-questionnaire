@@ -1,16 +1,16 @@
 // 配置单选题 SingleSelect 和编辑组件的映射关系（EditorStateSchema）
 // 单选题（业务组件） ---> 编辑组件有哪些
 
-import TextNote from '@/components/ServeComs/Materials/NoteComs/TextNote.vue';
+import TextNote from '@/components/SurveyComs/Materials/NoteComs/TextNote.vue';
 
-import TitleEditor from '@/components/ServeComs/EditItems/TitleEditor.vue';
-import DescEditor from '@/components/ServeComs/EditItems/DescEditor.vue';
-import TextTypeEditor from '@/components/ServeComs/EditItems/TextTypeEditor.vue';
-import PositionEditor from '@/components/ServeComs/EditItems/PositionEditor.vue';
-import SizeEditor from '@/components/ServeComs/EditItems/SizeEditor.vue';
-import WeightEditor from '@/components/ServeComs/EditItems/WeightEditor.vue';
-import ItalicEditor from '@/components/ServeComs/EditItems/ItalicEditor.vue';
-import ColorEditor from '@/components/ServeComs/EditItems/ColorEditor.vue';
+import TitleEditor from '@/components/SurveyComs/EditItems/TitleEditor.vue';
+import DescEditor from '@/components/SurveyComs/EditItems/DescEditor.vue';
+import TextTypeEditor from '@/components/SurveyComs/EditItems/TextTypeEditor.vue';
+import PositionEditor from '@/components/SurveyComs/EditItems/PositionEditor.vue';
+import SizeEditor from '@/components/SurveyComs/EditItems/SizeEditor.vue';
+import WeightEditor from '@/components/SurveyComs/EditItems/WeightEditor.vue';
+import ItalicEditor from '@/components/SurveyComs/EditItems/ItalicEditor.vue';
+import ColorEditor from '@/components/SurveyComs/EditItems/ColorEditor.vue';
 import { markRaw } from 'vue';
 import { v4 as uuidv4 } from 'uuid';
 import type { ComStatus } from '@/types/common.ts';

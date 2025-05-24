@@ -1,14 +1,14 @@
 import { computed } from 'vue';
 import type { ComStatus } from '@/types/common.ts';
-import { isServeComName } from '@/types/store.ts';
+import { isSurveyComName } from '@/types/store.ts';
 
 // 返回问卷题目序号的数组
-export function useServeNo(coms: ComStatus[]) {
+export function useSurveyNo(coms: ComStatus[]) {
   return computed(() => {
     let questionNumber = 1;
     return coms.map((com) => {
       // 需要判断当前这个组件是不是问卷题目
-      if (isServeComName(com.name)) {
+      if (isSurveyComName(com.name)) {
         return questionNumber++;
       }
       return null;

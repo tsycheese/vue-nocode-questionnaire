@@ -8,12 +8,12 @@
     >
       <template v-for="(element, index) in editorStore.coms" :key="element.id">
         <div
-          v-if="serveNo[index] !== null"
+          v-if="surveyNo[index] !== null"
           class="outline-item"
           :class="{ active: index === curComIndex }"
           @click="changeCurCom(index)"
         >
-          {{ serveNo[index] }}. {{ element.status.title.status }}
+          {{ surveyNo[index] }}. {{ element.status.title.status }}
         </div>
       </template>
     </VueDraggable>
@@ -24,17 +24,17 @@
 import { useEditorStore } from '@/stores/editorStore.ts';
 import { computed, watch } from 'vue';
 import { VueDraggable } from 'vue-draggable-plus';
-import { useServeNo } from '@/hooks/useServeNo.ts';
+import { useSurveyNo } from '@/hooks/useSurveyNo';
 import eventBus from '@/utils/eventBus.ts';
 
 const editorStore = useEditorStore();
 const curComIndex = computed(() => editorStore.currentComIndex);
-let serveNo = useServeNo(editorStore.coms);
+let surveyNo = useSurveyNo(editorStore.coms);
 
 watch(
   () => editorStore.coms,
   () => {
-    serveNo = useServeNo(editorStore.coms);
+    surveyNo = useSurveyNo(editorStore.coms);
   },
   {
     deep: true,

@@ -33,6 +33,6 @@ export interface MaterialStore extends Actions {
   setCurrentMaterialCom: (material: Material) => void;
 }
 
-export function isServeComName(name: string): name is SurveyComName {
+export function isSurveyComName(name: string): name is SurveyComName {
   return SurveyComNameArr.includes(name as SurveyComName);
 }

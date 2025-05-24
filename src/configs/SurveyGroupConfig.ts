@@ -1,7 +1,7 @@
 // 该文件是题型面板对应的配置文件，用于配置题型面板的题型信息
 import { CircleCheck, ChatLineSquare, User } from '@element-plus/icons-vue';
 
-export const ServeComList = [
+export const SurveyComList = [
   {
     title: '选择题',
     icon: CircleCheck,

@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import { useEditorStore } from '@/stores/editorStore.ts';
-import EditPanel from '@/components/ServeComs/EditItems/EditPanel.vue';
+import EditPanel from '@/components/SurveyComs/EditItems/EditPanel.vue';
 import { computed } from 'vue';
 
 const editorStore = useEditorStore();

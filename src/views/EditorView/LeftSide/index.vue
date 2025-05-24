@@ -1,7 +1,7 @@
 <template>
   <div class="left-side">
     <div class="tabs">
-      <RouterLink class="tab-item" active-class="tab-active" to="/editor/serve-type">
+      <RouterLink class="tab-item" active-class="tab-active" to="/editor/survey-type">
         <el-icon><Document /></el-icon>
         <span>题型</span>
       </RouterLink>
@@ -10,7 +10,7 @@
         <span>大纲</span>
       </RouterLink>
     </div>
-    <!-- 可能是 OutlineView | ServeTypeView -->
+    <!-- 可能是 OutlineView | SurveyTypeView -->
     <div class="view">
       <RouterView />
     </div>

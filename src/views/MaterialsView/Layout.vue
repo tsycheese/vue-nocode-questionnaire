@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import { computed, provide } from 'vue';
 import { useMaterialStore } from '@/stores/materialStore.ts';
-import EditPanel from '@/components/ServeComs/EditItems/EditPanel.vue';
+import EditPanel from '@/components/SurveyComs/EditItems/EditPanel.vue';
 import { ElMessage } from 'element-plus';
 import { isPicLink, type PicLink } from '@/types/editProps.ts';
 

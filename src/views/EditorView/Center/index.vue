@@ -2,15 +2,15 @@
   <div class="center-container">
     <VueDraggable
       v-model="editorStore.coms"
-      group="serve-coms"
+      group="survey-coms"
       item-key="id"
       @dragstart="handleDragStart"
     >
       <div
         v-for="(element, index) in editorStore.coms"
-        ref="serve-com-item"
+        ref="survey-com-item"
         :key="element.id"
-        class="serve-com-item"
+        class="survey-com-item"
         :class="{ active: index === curComIndex }"
         @click="changeCurCom(index)"
       >
@@ -22,7 +22,7 @@
         <component
           :is="element.type"
           :status="element.status"
-          :serialNum="serveNo[index]"
+          :serialNum="surveyNo[index]"
         ></component>
       </div>
     </VueDraggable>
@@ -33,20 +33,20 @@
 import { useEditorStore } from '@/stores/editorStore.ts';
 import { computed, watch, nextTick } from 'vue';
 import { VueDraggable } from 'vue-draggable-plus';
-import { useServeNo } from '@/hooks/useServeNo.ts';
+import { useSurveyNo } from '@/hooks/useSurveyNo';
 import eventBus from '@/utils/eventBus.ts';
 import { useTemplateRef } from 'vue';
 import { Close } from '@element-plus/icons-vue';
 
 const editorStore = useEditorStore();
 const curComIndex = computed(() => editorStore.currentComIndex);
-let serveNo = useServeNo(editorStore.coms);
-const componentsRefs = useTemplateRef<HTMLElement[]>('serve-com-item');
+let surveyNo = useSurveyNo(editorStore.coms);
+const componentsRefs = useTemplateRef<HTMLElement[]>('survey-com-item');
 
 watch(
   () => editorStore.coms,
   () => {
-    serveNo = useServeNo(editorStore.coms);
+    surveyNo = useSurveyNo(editorStore.coms);
   },
   {
     deep: true,
@@ -88,7 +88,7 @@ eventBus.on('scrollToCenter', scrollToCenter);
   overflow-y: auto;
 }
 
-.serve-com-item {
+.survey-com-item {
   margin-bottom: 10px;
   padding: 10px;
   cursor: pointer;

@@ -1,5 +1,5 @@
 <template>
-  <div class="serve-com-item" @click="addServeCom">{{ comName }}</div>
+  <div class="survey-com-item" @click="addSurveyCom">{{ comName }}</div>
 </template>
 
 <script setup lang="ts">
@@ -15,7 +15,7 @@ const props = defineProps<{
 }>();
 const editorStore = useEditorStore();
 
-const addServeCom = () => {
+const addSurveyCom = () => {
   if (!defaultStatusMap.hasOwnProperty(props.materialName)) {
     console.warn(`没有找到${props.materialName}的默认状态`);
     return;
@@ -29,7 +29,7 @@ const addServeCom = () => {
 </script>
 
 <style scoped lang="scss">
-.serve-com-item {
+.survey-com-item {
   width: 80px;
   height: 30px;
   background-color: var(--el-fill-color-light);
