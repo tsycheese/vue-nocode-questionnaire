@@ -3,7 +3,11 @@
     <div class="left">
       <el-button circle size="small" :icon="ArrowLeft" @click="router.push('/')" />
     </div>
-    <div class="center"></div>
+    <div class="center">
+      <div v-if="isEditor">
+        <el-button class="btn" type="success" size="small">保存问卷</el-button>
+      </div>
+    </div>
     <div class="right">
       <img :src="imgUrl" />
     </div>
@@ -14,6 +18,13 @@
 import { ArrowLeft } from '@element-plus/icons-vue';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
+
+defineProps({
+  isEditor: {
+    type: Boolean,
+    default: false,
+  },
+});
 
 const router = useRouter();
 const imgUrl = ref('https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif');
@@ -49,6 +60,16 @@ const imgUrl = ref('https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4ac
     width: 30px;
     height: 30px;
     border-radius: 50%;
+  }
+}
+
+.center {
+  flex: 1;
+  display: flex;
+  align-items: center;
+
+  .btn {
+    margin-left: 20px;
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="materials-view">
-    <Header />
+    <Header :is-editor="false" />
     <h1 class="text-center font-weight-300">组件市场</h1>
     <div class="main">
       <!-- 左侧导航 -->

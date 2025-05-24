@@ -1,6 +1,6 @@
 <template>
   <div class="editor-view">
-    <Header class="header"></Header>
+    <Header class="header" :is-editor="true"></Header>
     <div class="container" ref="container">
       <div class="left">
         <LeftSide></LeftSide>
