@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="left">
-      <el-button circle size="small" :icon="ArrowLeft" @click="router.go(-1)" />
+      <el-button circle size="small" :icon="ArrowLeft" @click="router.push('/')" />
     </div>
     <div class="center"></div>
     <div class="right">
