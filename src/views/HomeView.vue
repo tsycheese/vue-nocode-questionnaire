@@ -14,19 +14,21 @@
         prop="createDate"
         label="创建日期"
         width="180"
+        :formatter="formatDate"
       ></el-table-column>
       <el-table-column prop="title" label="问卷标题"></el-table-column>
       <el-table-column
-        prop="questionCount"
+        prop="surveyCount"
         label="题目数量"
         width="180"
         algin="center"
       ></el-table-column>
       <el-table-column
-        prop="lastEditDate"
+        prop="updateDate"
         label="最后编辑日期"
         width="180"
         align="center"
+        :formatter="formatDate"
       ></el-table-column>
       <el-table-column fixed="right" label="操作" width="300" align="center">
         <template #default>
@@ -45,17 +47,22 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { setActiveView } from '@/utils/webStorage.ts';
 import { ActiveView } from '@/utils/webStorage.ts';
+import { getAllSurveys } from '@/db/operation.ts';
+import type { SurveyDBData } from '@/types/db.ts';
+import { formatDate } from '@/utils/date.ts';
 
 const router = useRouter();
+const tableData = ref<SurveyDBData[]>([]);
 
-const tableData = ref([
-  {
-    createDate: '2023-10-01',
-    title: '问卷标题1',
-    questionCount: 10,
-    lastEditDate: '2023-10-02',
-  },
-]);
+const getData = async () => {
+  try {
+    const surveys = await getAllSurveys();
+    tableData.value = surveys;
+  } catch (error) {
+    console.error('Error fetching surveys:', error);
+  }
+};
+getData();
 
 const goToCompMarket = () => {
   // 设置当前活动视图为 MaterialView
