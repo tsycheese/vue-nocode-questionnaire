@@ -62,7 +62,7 @@ const computedStatus = computed(() => ({
   titleColor: getTextStatus(props.status.titleColor),
   descColor: getTextStatus(props.status.descColor),
 }));
-const curSelected = ref(0);
+const curSelected = ref(-1);
 </script>
 
 <style scoped lang="scss">
