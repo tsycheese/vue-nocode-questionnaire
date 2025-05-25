@@ -54,5 +54,5 @@ const computedStatus = computed(() => ({
   descColor: getTextStatus(props.status.descColor),
 }));
 
-const curSelected = ref(0);
+const curSelected = ref(-1);
 </script>
