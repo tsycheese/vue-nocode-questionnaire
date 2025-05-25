@@ -122,6 +122,11 @@ const router = createRouter({
         },
       ],
     },
+    {
+      path: '/preview/:id(\\d+)',
+      name: 'preview',
+      component: () => import('@/views/PreviewView.vue'),
+    },
   ],
 });
 

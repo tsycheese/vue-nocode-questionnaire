@@ -8,7 +8,7 @@
     </div>
     <!-- 数据表格 -->
     <!-- | 创建日期 | 问卷标题 | 题目数量 | 最后编辑日期 | 操作  -->
-    <el-table :data="tableData" border stripe :row-style="{ height: '60px' }">
+    <el-table :data="tableData" border :row-style="{ height: '60px' }">
       <el-table-column
         fixed="left"
         prop="createDate"
@@ -31,8 +31,8 @@
         :formatter="formatDate"
       ></el-table-column>
       <el-table-column fixed="right" label="操作" width="300" align="center">
-        <template #default>
-          <el-button type="primary" link>查看问卷</el-button>
+        <template #default="scope">
+          <el-button type="primary" link @click="goToPreview(scope.row)">查看问卷</el-button>
           <el-button type="primary" link>编辑</el-button>
           <el-button type="primary" link>删除</el-button>
         </template>
@@ -50,9 +50,11 @@ import { ActiveView } from '@/utils/webStorage.ts';
 import { getAllSurveys } from '@/db/operation.ts';
 import type { SurveyDBData } from '@/types/db.ts';
 import { formatDate } from '@/utils/date.ts';
+import { useEditorStore } from '@/stores/editorStore.ts';
 
 const router = useRouter();
 const tableData = ref<SurveyDBData[]>([]);
+const editorStore = useEditorStore();
 
 const getData = async () => {
   try {
@@ -74,6 +76,13 @@ const goToEditor = () => {
   // 设置当前活动视图为 EditorView
   setActiveView(ActiveView.Editor);
   router.push('/editor');
+};
+
+const goToPreview = (row: SurveyDBData) => {
+  // 设置当前活动视图为 PreviewView
+  setActiveView(ActiveView.Preview);
+  editorStore.setStore(row);
+  router.push(`/preview/${row.id}`);
 };
 </script>
 
