@@ -51,6 +51,12 @@ export const useEditorStore = defineStore('editorStore', {
     async saveSurveyToDB(data: SurveyDBData) {
       return saveSurvey(data);
     },
+    // 还原问卷的仓库状态，其实就是根据传入的数据设置 coms、surveyCount、currentComIndex
+    setStore(data: SurveyDBData) {
+      this.coms = data.coms;
+      this.surveyCount = data.surveyCount;
+      this.currentComIndex = -1;
+    },
     setTextStatus,
     addOptionStatus,
     removeOptionStatus,
