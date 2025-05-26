@@ -21,11 +21,27 @@ import LeftSide from './LeftSide/index.vue';
 import Center from './Center/index.vue';
 import RightSide from './RightSide/index.vue';
 import eventBus from '@/utils/eventBus.ts';
-import { useTemplateRef } from 'vue';
+import { onMounted, useTemplateRef } from 'vue';
 import { useEditorStore } from '@/stores/editorStore.ts';
 import { computed, provide } from 'vue';
 import { isPicLink, type PicLink } from '@/types/editProps.ts';
 import { ElMessage } from 'element-plus';
+import { useRoute, useRouter } from 'vue-router';
+
+const router = useRouter();
+const route = useRoute();
+const surveyId = route.params.id;
+const editorStore = useEditorStore();
+
+// 在组件挂载后获取问卷数据
+onMounted(async () => {
+  if (surveyId) {
+    await editorStore.getSurveyFromDB(Number(surveyId));
+  } else {
+    // 如果没有 surveyId，则重置 store
+    editorStore.setStore();
+  }
+});
 
 // 滚动行为控制，当添加新组件时，滚动到底部
 const containerRef = useTemplateRef<HTMLDivElement>('container');
@@ -39,7 +55,6 @@ eventBus.on('scrollToBottom', () => {
 });
 
 // ---------------------------------------
-const editorStore = useEditorStore();
 const currentMaterialCom = computed(() => editorStore.coms[editorStore.currentComIndex]);
 
 // 使用依赖注入向后代组件提供更新状态的方法
