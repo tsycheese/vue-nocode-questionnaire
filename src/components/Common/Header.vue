@@ -4,10 +4,23 @@
       <el-button circle size="small" :icon="ArrowLeft" @click="router.push('/')" />
     </div>
     <div class="center">
-      <div v-if="isEditor">
-        <el-button class="btn" type="success" size="small" @click="handleSaveSurvey">
-          保存问卷
-        </el-button>
+      <div v-if="isEditor" class="btn-group">
+        <div v-if="surveyId">
+          <el-button class="btn" type="warning" size="small" @click="handleUpdateSurvey">
+            更新问卷
+          </el-button>
+        </div>
+        <div v-else>
+          <el-button class="btn" type="danger" size="small" @click="handleRestoreSurvey">
+            重置问卷
+          </el-button>
+          <el-button class="btn" type="success" size="small" @click="handleSaveSurvey">
+            保存问卷
+          </el-button>
+        </div>
+        <div>
+          <el-button class="btn" type="primary" size="small" @click="goToPreview"> 预览 </el-button>
+        </div>
       </div>
     </div>
     <div class="right">
@@ -18,7 +31,7 @@
 
 <script setup lang="ts">
 import { ArrowLeft } from '@element-plus/icons-vue';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { ref } from 'vue';
 import { useEditorStore } from '@/stores/editorStore.ts';
 import { ElMessage, ElMessageBox } from 'element-plus';
@@ -32,6 +45,8 @@ defineProps({
 });
 
 const router = useRouter();
+const route = useRoute();
+const surveyId = route.params.id;
 const imgUrl = ref('https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif');
 const editorStore = useEditorStore();
 
@@ -62,12 +77,60 @@ const handleSaveSurvey = () => {
       ElMessage.info('取消保存');
     });
 };
+
+const handleUpdateSurvey = () => {
+  ElMessageBox.confirm('是否更新问卷？', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(() => {
+    editorStore
+      .updateSurveyToDB(Number(surveyId))
+      .then(() => {
+        ElMessage.success('问卷更新成功');
+      })
+      .catch((error) => {
+        ElMessage.error('问卷更新失败');
+      });
+  });
+};
+
+const handleRestoreSurvey = () => {
+  ElMessageBox.confirm('是否重置问卷？', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  })
+    .then(() => {
+      editorStore.setStore();
+      ElMessage.success('问卷重置成功');
+    })
+    .catch(() => {
+      ElMessage.info('取消重置');
+    });
+};
+
+const goToPreview = () => {
+  ElMessageBox.confirm('预览将会保存问卷，是否继续？', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  }).then(() => {
+    editorStore
+      .updateSurveyToDB(Number(surveyId))
+      .then(() => {
+        router.push(`/preview/${surveyId}`);
+      })
+      .catch((error) => {
+        ElMessage.error('问卷更新失败');
+      });
+  });
+};
 </script>
 
 <style scoped lang="scss">
 .header {
   display: flex;
-  justify-content: space-between;
   height: 50px;
   border-bottom: 1px solid var(--border-color);
   background-color: var(--white);
@@ -98,12 +161,14 @@ const handleSaveSurvey = () => {
 }
 
 .center {
-  flex: 1;
-  display: flex;
-  align-items: center;
+  flex-grow: 1;
+  padding: 0 20px;
+}
 
-  .btn {
-    margin-left: 20px;
-  }
+.btn-group {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
 }
 </style>
