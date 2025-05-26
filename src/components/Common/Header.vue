@@ -79,20 +79,14 @@ const handleSaveSurvey = () => {
 };
 
 const handleUpdateSurvey = () => {
-  ElMessageBox.confirm('是否更新问卷？', '提示', {
-    confirmButtonText: '确定',
-    cancelButtonText: '取消',
-    type: 'warning',
-  }).then(() => {
-    editorStore
-      .updateSurveyToDB(Number(surveyId))
-      .then(() => {
-        ElMessage.success('问卷更新成功');
-      })
-      .catch((error) => {
-        ElMessage.error('问卷更新失败');
-      });
-  });
+  editorStore
+    .updateSurveyToDB(Number(surveyId))
+    .then(() => {
+      ElMessage.success('问卷更新成功');
+    })
+    .catch((error) => {
+      ElMessage.error('问卷更新失败');
+    });
 };
 
 const handleRestoreSurvey = () => {
