@@ -40,7 +40,14 @@ export async function deleteSurveyById(id: number) {
 }
 
 export async function updateSurveyById(id: number, survey: Partial<SurveyDBData>) {
-  return await db.surveys.update(id, survey);
+  // 由于 indexDB 存储的对象不能包含函数，所以需要将 coms 转换为 JSON 字符串
+  // 转换的同时，包含的 type (vue 组件类型) 会丢失方法，后续取出需要还原
+  // 修改后，会添加 id 字段
+  const modifiedSurvey = {
+    ...survey,
+    coms: JSON.parse(JSON.stringify(survey.coms)) as any,
+  };
+  return await db.surveys.update(id, modifiedSurvey);
 }
 
 // 还原组件类型
