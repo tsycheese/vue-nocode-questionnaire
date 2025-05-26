@@ -44,9 +44,14 @@ export async function updateSurveyById(id: number, survey: Partial<SurveyDBData>
 }
 
 // 还原组件类型
-const restoreComType = (coms: ComStatus): ComStatus => {
+const restoreComType = (com: ComStatus): ComStatus => {
+  const status = com.status;
+  for (const optionKey in status) {
+    const option = status[optionKey as keyof typeof status];
+    option.editCom = componentMap[option.name as keyof typeof componentMap];
+  }
   return {
-    ...coms,
-    type: componentMap[coms.name as keyof typeof componentMap],
+    ...com,
+    type: componentMap[com.name as keyof typeof componentMap],
   };
 };
