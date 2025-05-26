@@ -10,7 +10,7 @@ import {
 import type { TypeStatus } from '@/types/editProps.ts';
 import { isSurveyComName } from '@/types/store.ts';
 import type { SurveyDBData } from '@/types/db.ts';
-import { saveSurvey } from '@/db/operation.ts';
+import { getSurveyById, saveSurvey } from '@/db/operation.ts';
 
 export const useEditorStore = defineStore('editorStore', {
   state: () => ({
@@ -51,11 +51,24 @@ export const useEditorStore = defineStore('editorStore', {
     async saveSurveyToDB(data: SurveyDBData) {
       return saveSurvey(data);
     },
+    async getSurveyFromDB(id: number) {
+      const survey = await getSurveyById(id);
+      if (survey) {
+        this.setStore(survey);
+      }
+    },
     // 还原问卷的仓库状态，其实就是根据传入的数据设置 coms、surveyCount、currentComIndex
-    setStore(data: SurveyDBData) {
-      this.coms = data.coms;
-      this.surveyCount = data.surveyCount;
-      this.currentComIndex = -1;
+    setStore(data?: SurveyDBData) {
+      if (data) {
+        this.coms = data.coms;
+        this.surveyCount = data.surveyCount;
+        this.currentComIndex = -1;
+      } else {
+        // 如果没有传入数据，就清空仓库状态
+        this.coms = [];
+        this.surveyCount = 0;
+        this.currentComIndex = -1;
+      }
     },
     setTextStatus,
     addOptionStatus,
