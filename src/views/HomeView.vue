@@ -50,11 +50,9 @@ import { ActiveView } from '@/utils/webStorage.ts';
 import { getAllSurveys } from '@/db/operation.ts';
 import type { SurveyDBData } from '@/types/db.ts';
 import { formatDate } from '@/utils/date.ts';
-import { useEditorStore } from '@/stores/editorStore.ts';
 
 const router = useRouter();
 const tableData = ref<SurveyDBData[]>([]);
-const editorStore = useEditorStore();
 
 const getData = async () => {
   try {
@@ -81,7 +79,6 @@ const goToEditor = () => {
 const goToPreview = (row: SurveyDBData) => {
   // 设置当前活动视图为 PreviewView
   setActiveView(ActiveView.Preview);
-  editorStore.setStore(row);
   router.push(`/preview/${row.id}`);
 };
 </script>
