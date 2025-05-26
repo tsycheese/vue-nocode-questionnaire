@@ -33,8 +33,8 @@
       <el-table-column fixed="right" label="操作" width="300" align="center">
         <template #default="scope">
           <el-button type="primary" link @click="goToPreview(scope.row)">查看问卷</el-button>
-          <el-button type="primary" link>编辑</el-button>
-          <el-button type="primary" link>删除</el-button>
+          <el-button type="primary" link @click="goToEdit(scope.row)">编辑</el-button>
+          <el-button type="primary" link @click="handleDelete(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -50,6 +50,8 @@ import { ActiveView } from '@/utils/webStorage.ts';
 import { getAllSurveys } from '@/db/operation.ts';
 import type { SurveyDBData } from '@/types/db.ts';
 import { formatDate } from '@/utils/date.ts';
+import { ElMessage, ElMessageBox } from 'element-plus';
+import { deleteSurveyById } from '../db/operation.js';
 
 const router = useRouter();
 const tableData = ref<SurveyDBData[]>([]);
@@ -80,6 +82,35 @@ const goToPreview = (row: SurveyDBData) => {
   // 设置当前活动视图为 PreviewView
   setActiveView(ActiveView.Preview);
   router.push(`/preview/${row.id}`);
+};
+
+const goToEdit = (row: SurveyDBData) => {
+  // 设置当前活动视图为 EditorView
+  setActiveView(ActiveView.Editor);
+  router.push(`/editor/${row.id}`);
+};
+
+const handleDelete = (row: SurveyDBData) => {
+  ElMessageBox.confirm('是否删除该问卷？', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  })
+    .then(() => {
+      // 执行删除操作
+      deleteSurveyById(row.id as number)
+        .then(() => {
+          ElMessage.success('问卷删除成功');
+          getData();
+        })
+        .catch((error) => {
+          ElMessage.error('问卷删除失败');
+        });
+    })
+    .catch(() => {
+      // 用户取消删除
+      ElMessage.info('取消删除');
+    });
 };
 </script>
 
