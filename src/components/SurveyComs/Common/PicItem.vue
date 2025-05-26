@@ -33,7 +33,7 @@ import { Upload } from '@element-plus/icons-vue';
 import { ElMessage } from 'element-plus';
 
 const props = defineProps(['title', 'desc', 'url', 'index']);
-const getLink = inject('getLink');
+const getLink = inject('getLink', () => {});
 
 const handleImageUpload = (response: any) => {
   // @ts-ignore
