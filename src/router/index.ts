@@ -11,18 +11,18 @@ const router = createRouter({
       component: () => import('@/views/HomeView.vue'),
     },
     {
-      path: '/editor',
+      path: '/editor/:id(\\d+)?',
       name: 'editor',
       component: () => import('@/views/EditorView/index.vue'),
-      redirect: '/editor/survey-type',
+      redirect: { name: 'survey-type' },
       children: [
         {
-          path: '/editor/survey-type',
+          path: 'survey-type',
           name: 'survey-type',
           component: () => import('@/views/EditorView/LeftSide/SurveyTypeView.vue'),
         },
         {
-          path: '/editor/outline',
+          path: 'outline',
           name: 'outline',
           component: () => import('@/views/EditorView/LeftSide/OutlineView.vue'),
         },
