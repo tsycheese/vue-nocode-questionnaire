@@ -3,7 +3,7 @@
     <div class="top">
       <div class="left not-print">
         <el-button type="danger" @click="handleGoBack">返回</el-button>
-        <el-button type="success">生成在线问卷</el-button>
+        <el-button type="success" @click="handleGenerateQuiz">生成在线问卷</el-button>
         <el-button type="warning" @click="handleGeneratePDF">生成本地PDF</el-button>
       </div>
       <div class="right">题目数量：{{ editorStore.surveyCount }}</div>
@@ -14,6 +14,14 @@
       </div>
     </div>
   </div>
+  <el-dialog v-model="dialogVisible" title="在线问卷" width="500">
+    分享链接: <a :href="quizLink" target="_blank">{{ quizLink }}</a>
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button type="primary" @click="copyLink">复制链接</el-button>
+      </div>
+    </template>
+  </el-dialog>
 </template>
 
 <script setup lang="ts">
@@ -21,14 +29,18 @@ import { useSurveyNo } from '@/hooks/useSurveyNo.ts';
 import { useEditorStore } from '@/stores/editorStore.ts';
 import { canUsedForPDF, type Material } from '@/types/store.ts';
 import { ElMessage } from 'element-plus';
-import { computed, onBeforeMount } from 'vue';
+import { computed, onBeforeMount, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { v4 as uuidv4 } from 'uuid';
 
 const router = useRouter();
 const route = useRoute();
 const surveyId = route.params.id;
 const editorStore = useEditorStore();
 const surveyNo = computed(() => useSurveyNo(editorStore.coms).value);
+// 控制弹出框是否显示
+const dialogVisible = ref(false);
+const quizLink = ref(''); // 存储生成的在线答题的链接
 
 // 在组件挂载前获取问卷数据
 onBeforeMount(async () => {
@@ -58,6 +70,35 @@ const handleGeneratePDF = () => {
   }
   // 2. 开始生成PDF
   window.print();
+};
+
+const handleGenerateQuiz = () => {
+  // 1. 首先将问卷的数据传递到服务器端，服务器端存储到内存中
+  const id = uuidv4();
+  // 将问卷内容和id传递给服务器
+  fetch('/api/saveQuiz', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      id,
+      quizData: {
+        coms: JSON.stringify(editorStore.coms),
+        surveyCount: editorStore.surveyCount,
+      },
+    }),
+  });
+  // 2. 将弹出框显示出来
+  quizLink.value = `${window.location.origin}/quiz/${id}`;
+  dialogVisible.value = true;
+};
+
+// 复制在线答题的链接
+const copyLink = () => {
+  dialogVisible.value = false;
+  navigator.clipboard.writeText(quizLink.value);
+  ElMessage.success('在线答题的链接已复制');
 };
 </script>
 
