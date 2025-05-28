@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import type { OptionsStatus } from '@/types/editProps.ts';
 import MaterialHeader from '../../Common/MaterialHeader.vue';
 import PicItem from '../../Common/PicItem.vue';
@@ -63,6 +63,12 @@ const computedStatus = computed(() => ({
   descColor: getTextStatus(props.status.descColor),
 }));
 const curSelected = ref(-1);
+const answer = computed(() => computedStatus.value.options[curSelected.value].picTitle);
+
+const emit = defineEmits(['updateAnswer']);
+watch(curSelected, () => {
+  emit('updateAnswer', answer.value);
+});
 </script>
 
 <style scoped lang="scss">

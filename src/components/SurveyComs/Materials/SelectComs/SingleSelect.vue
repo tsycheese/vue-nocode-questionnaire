@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import MaterialHeader from '../../Common/MaterialHeader.vue';
 import type { OptionsStatus } from '@/types/editProps.ts';
 import {
@@ -55,4 +55,10 @@ const computedStatus = computed(() => ({
 }));
 
 const curSelected = ref(-1);
+const answer = computed(() => computedStatus.value.options[curSelected.value]);
+
+const emit = defineEmits(['updateAnswer']);
+watch(curSelected, () => {
+  emit('updateAnswer', answer.value);
+});
 </script>
