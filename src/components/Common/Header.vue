@@ -18,7 +18,7 @@
             保存问卷
           </el-button>
         </div>
-        <div>
+        <div v-if="surveyId">
           <el-button class="btn" type="primary" size="small" @click="goToPreview"> 预览 </el-button>
         </div>
       </div>
@@ -32,7 +32,7 @@
 <script setup lang="ts">
 import { ArrowLeft } from '@element-plus/icons-vue';
 import { useRoute, useRouter } from 'vue-router';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useEditorStore } from '@/stores/editorStore.ts';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import type { SurveyDBData } from '@/types/db.ts';
@@ -46,7 +46,7 @@ defineProps({
 
 const router = useRouter();
 const route = useRoute();
-const surveyId = route.params.id;
+const surveyId = computed(() => route.params.id);
 const imgUrl = ref('https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif');
 const editorStore = useEditorStore();
 
@@ -66,8 +66,9 @@ const handleSaveSurvey = () => {
       };
       editorStore
         .saveSurveyToDB(surveyData)
-        .then(() => {
+        .then((surveyId) => {
           ElMessage.success('问卷保存成功');
+          router.push(`/editor/${surveyId}`);
         })
         .catch((error) => {
           ElMessage.error('问卷保存失败');
