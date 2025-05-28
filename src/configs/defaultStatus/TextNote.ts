@@ -35,14 +35,14 @@ export default function () {
 
       title: {
         id: uuidv4(),
-        status: '单选题默认标题',
+        status: '默认标题',
         isShow: false,
         name: 'title-editor',
         editCom: markRaw(TitleEditor),
       },
       desc: {
         id: uuidv4(),
-        status: '单选题默认描述',
+        status: '默认描述',
         isShow: true,
         name: 'desc-editor',
         editCom: markRaw(DescEditor),
