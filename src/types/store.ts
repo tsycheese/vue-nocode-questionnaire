@@ -36,3 +36,20 @@ export interface MaterialStore extends Actions {
 export function isSurveyComName(name: string): name is SurveyComName {
   return SurveyComNameArr.includes(name as SurveyComName);
 }
+
+const PDFComs: Material[] = [
+  'single-select',
+  'single-pic-select',
+  'personal-info-gender',
+  'personal-info-education',
+  'title-note',
+];
+
+export function canUsedForPDF(name: Material): boolean {
+  return PDFComs.includes(name);
+}
+
+export type QuizData = {
+  surveyCount: number;
+  coms: ComStatus[];
+};

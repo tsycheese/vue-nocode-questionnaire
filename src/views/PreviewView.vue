@@ -1,10 +1,10 @@
 <template>
-  <div class="preview-view">
+  <div class="preview-view print-box">
     <div class="top">
-      <div class="left">
+      <div class="left not-print">
         <el-button type="danger" @click="handleGoBack">返回</el-button>
         <el-button type="success">生成在线问卷</el-button>
-        <el-button type="warning">生成本地PDF</el-button>
+        <el-button type="warning" @click="handleGeneratePDF">生成本地PDF</el-button>
       </div>
       <div class="right">题目数量：{{ editorStore.surveyCount }}</div>
     </div>
@@ -19,6 +19,8 @@
 <script setup lang="ts">
 import { useSurveyNo } from '@/hooks/useSurveyNo.ts';
 import { useEditorStore } from '@/stores/editorStore.ts';
+import { canUsedForPDF, type Material } from '@/types/store.ts';
+import { ElMessage } from 'element-plus';
 import { computed, onBeforeMount } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
@@ -46,6 +48,17 @@ const handleGoBack = () => {
     router.go(-1);
   }
 };
+
+const handleGeneratePDF = () => {
+  // 1. 检查：检查当前的问卷是否存在不适合生成PDF的业务组件
+  const result = editorStore.coms.every((item) => canUsedForPDF(item.name as Material));
+  if (!result) {
+    ElMessage.warning('当前问卷中存在不支持生成PDF的业务组件，请检查后再试！');
+    return;
+  }
+  // 2. 开始生成PDF
+  window.print();
+};
 </script>
 
 <style scoped lang="scss">
@@ -66,6 +79,16 @@ const handleGoBack = () => {
 .com-item {
   padding: 10px;
   border-bottom: 1px solid var(--border-color);
-  margin-bottom: 10px;
+}
+
+@media print {
+  .not-print {
+    display: none;
+  }
+
+  .print-box {
+    box-shadow: none;
+    border: none;
+  }
 }
 </style>
