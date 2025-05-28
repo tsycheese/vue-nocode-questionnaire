@@ -2,7 +2,7 @@
   <div class="quiz-view" v-if="quizData">
     <div class="quiz-container mc">
       <div class="mt-30 mb-20">题目数量：{{ quizData.surveyCount }}</div>
-      <div class="content mb-10" v-for="(com, index) in quizData.coms" :key="index">
+      <div class="content" v-for="(com, index) in quizData.coms" :key="index">
         <component
           :is="com.type"
           :status="com.status"
@@ -75,5 +75,10 @@ const submitAnswers = async () => {
 <style scoped lang="scss">
 .quiz-container {
   width: 800px;
+}
+
+.content {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-color);
 }
 </style>
