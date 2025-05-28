@@ -1,7 +1,6 @@
-import type { ComStatus } from '@/types/common.ts';
 import { db } from './db.ts';
 import type { SurveyDBData } from '@/types/db.ts';
-import { componentMap } from '@/configs/componentMap.ts';
+import { restoreComType } from '@/utils/restore.ts';
 
 export async function saveSurvey(survey: SurveyDBData) {
   // 由于 indexDB 存储的对象不能包含函数，所以需要将 coms 转换为 JSON 字符串
@@ -49,16 +48,3 @@ export async function updateSurveyById(id: number, survey: Partial<SurveyDBData>
   };
   return await db.surveys.update(id, modifiedSurvey);
 }
-
-// 还原组件类型
-const restoreComType = (com: ComStatus): ComStatus => {
-  const status = com.status;
-  for (const optionKey in status) {
-    const option = status[optionKey as keyof typeof status];
-    option.editCom = componentMap[option.name as keyof typeof componentMap];
-  }
-  return {
-    ...com,
-    type: componentMap[com.name as keyof typeof componentMap],
-  };
-};
