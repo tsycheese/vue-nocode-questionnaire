@@ -42,7 +42,7 @@ export function setOptionsStatus(optionsProps: OptionsProps, index: number) {
 export function setPicLinkByIndex(optionsProps: OptionsProps, payload: PicLink) {
   if (isPicTitleDescStatusArr(optionsProps.status)) {
     // 只适用于开发环境
-    optionsProps.status[payload.index].value = 'http://localhost:3001' + payload.link;
+    optionsProps.status[payload.index].value = 'http://localhost:3002' + payload.link;
     if (payload.link === '') {
       optionsProps.status[payload.index].value = '';
     }
